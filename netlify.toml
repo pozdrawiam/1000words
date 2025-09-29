@@ -1,0 +1,12 @@
+[build]
+  base    = "src/Otw.WebApp"
+  publish = "build/wwwroot"
+  command = "dotnet publish Otw.WebApp.csproj -c Release -o build"
+
+[build.environment]
+  DOTNET_VERSION = "8.0.0"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
