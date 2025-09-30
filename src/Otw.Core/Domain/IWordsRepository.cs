@@ -2,5 +2,5 @@
 
 public interface IWordsRepository
 {
-    public Task<WordEntity[]> GetAll();
+    public Task<WordEntity[]> GetAllAsync();
 }
