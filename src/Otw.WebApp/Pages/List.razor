@@ -24,7 +24,6 @@ else
 }
 
 @code {
-    
     private ICollection<(string English, string Polish)>? _data;
 
     protected override async Task OnInitializedAsync()
@@ -33,5 +32,4 @@ else
         
         _data = words.Select(w => (w.Value, w.Translation)).ToList();
     }
-
 }
