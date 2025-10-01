@@ -36,4 +36,10 @@ public class WordsRepository : IWordsRepository
             Translation = x.Polish
         }).ToArray();
     }
+
+    public async Task<WordEntity?> GetByIdAsync(int id)
+    {
+        var result = (await GetAllAsync()).FirstOrDefault(x => x.Id == id);
+        return result;
+    }
 }
