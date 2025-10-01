@@ -9,8 +9,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        services.AddScoped<NextWordCmdHandler>();
         services.AddScoped<LastWordQueryHandler>();
+        services.AddScoped<NextWordCmdHandler>();
         
         return services;
     }
