@@ -1,5 +1,6 @@
 ﻿@page "/List"
-@inject HttpClient Http
+@using Otw.Core.Domain
+@inject IWordsRepository WordsRepository
 
 <h3>List</h3>
 
@@ -28,23 +29,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var csvContent = await Http.GetStringAsync("data/data-v1.csv");
+        var words = await WordsRepository.GetAllAsync();
         
-        var list = new List<(string English, string Polish)>();
-
-        // ReSharper disable once UseCollectionExpression
-        var lines = csvContent.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-        
-        for (int i = 0; i < lines.Length; i++)
-        {
-            var parts = lines[i].Split(';');
-            if (parts.Length >= 2)
-            {
-                list.Add((parts[0].Trim(), parts[1].Trim()));
-            }
-        }
-        
-        _data = list;
+        _data = words.Select(w => (w.Value, w.Translation)).ToList();
     }
 
 }
