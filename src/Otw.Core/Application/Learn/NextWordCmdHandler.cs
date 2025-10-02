@@ -4,10 +4,12 @@ namespace Otw.Core.Application.Learn;
 
 public sealed class NextWordCmdHandler
 {
+    private readonly ILocalStorageService _localStorage;
     private readonly IWordsRepository _repo;
 
-    public NextWordCmdHandler(IWordsRepository repo)
+    public NextWordCmdHandler(ILocalStorageService localStorage, IWordsRepository repo)
     {
+        _localStorage = localStorage;
         _repo = repo;
     }
 
@@ -15,11 +17,17 @@ public sealed class NextWordCmdHandler
     {
         var nextWordId = currentWordId + 1;
         var nextWord = await _repo.GetByIdAsync(nextWordId);
-        
+
         if (nextWord is not null)
+        {
+            await _localStorage.SetItemAsync("lastWordId", nextWord.Id.ToString());
+            
             return nextWord;
+        }
         
         var firstWord = (await _repo.GetAllAsync()).First();
+        await _localStorage.SetItemAsync("lastWordId", firstWord.Id.ToString());
+        
         return firstWord;
     }
 }

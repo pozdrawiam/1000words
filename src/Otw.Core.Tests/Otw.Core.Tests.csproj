@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Otw.WebApp\Otw.WebApp.csproj" />
+      <ProjectReference Include="..\Otw.Core\Otw.Core.csproj" />
     </ItemGroup>
 
 </Project>
