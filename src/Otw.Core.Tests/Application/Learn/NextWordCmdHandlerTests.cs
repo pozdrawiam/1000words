@@ -7,19 +7,25 @@ namespace Otw.Core.Tests.Application.Learn;
 public class NextWordCmdHandlerTests
 {
     private readonly NextWordCmdHandler _sut;
-    
-    private readonly Mock<IWordsRepository> _repoMock = new();
 
+    private readonly Mock<ILocalStorageService> _localStorageMock = new();
+    private readonly Mock<IWordsRepository> _repoMock = new();
+    
     public NextWordCmdHandlerTests()
     {
-        _sut = new(_repoMock.Object);
+        _sut = new(_localStorageMock.Object, _repoMock.Object);
     }
 
     [Fact]
     public async Task ExecuteAsync_ShouldReturnNextWord_WhenItExists()
     {
         const int currentWordId = 5;
-        var expectedNextWord = new WordEntity { Id = currentWordId + 1, Value = "NextWord", Translation = "" };
+        var expectedNextWord = new WordEntity
+        {
+            Id = currentWordId + 1,
+            Value = "NextWord",
+            Translation = ""
+        };
 
         _repoMock.Setup(r => r.GetByIdAsync(currentWordId + 1))
             .ReturnsAsync(expectedNextWord);
@@ -30,6 +36,10 @@ public class NextWordCmdHandlerTests
         Assert.Equal(expectedNextWord, result);
         _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
+
+        _localStorageMock.Verify(ls => 
+            ls.SetItemAsync("lastWordId", expectedNextWord.Id.ToString()), 
+            Times.Once);
     }
 
     [Fact]
@@ -55,6 +65,10 @@ public class NextWordCmdHandlerTests
         Assert.Equal(words.First(), result);
         _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
+
+        _localStorageMock.Verify(ls => 
+            ls.SetItemAsync("lastWordId", words.First().Id.ToString()), 
+            Times.Once);
     }
 
     [Fact]
@@ -67,10 +81,14 @@ public class NextWordCmdHandlerTests
 
         _repoMock.Setup(r => r.GetAllAsync())
             .ReturnsAsync([]);
-
-        // Act & Assert
+        
         await Assert.ThrowsAsync<InvalidOperationException>(() => 
+            // Act
             _sut.ExecuteAsync(currentWordId)
         );
+        
+        _localStorageMock.Verify(ls => 
+            ls.SetItemAsync(It.IsAny<string>(), It.IsAny<string>()), 
+            Times.Never);
     }
 }
