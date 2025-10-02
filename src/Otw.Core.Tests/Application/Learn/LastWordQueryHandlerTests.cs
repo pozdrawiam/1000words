@@ -8,11 +8,12 @@ public class LastWordQueryHandlerTests
 {
     private readonly LastWordQueryHandler _sut;
     
+    private readonly Mock<ILocalStorageService> _localStorageMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
 
     public LastWordQueryHandlerTests()
     {
-        _sut = new(_repoMock.Object);
+        _sut = new(_localStorageMock.Object, _repoMock.Object);
     }
 
     [Fact]
@@ -57,5 +58,54 @@ public class LastWordQueryHandlerTests
         Assert.Equal(words.First(), result);
         _repoMock.Verify(r => r.GetByIdAsync(1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
+    }
+    
+    [Fact]
+    public async Task ExecuteAsync_ShouldReturnWordWithIdFromLocalStorage_WhenItExists()
+    {
+        var expectedWord = new WordEntity
+        {
+            Id = 5,
+            Value = "Five",
+            Translation = ""
+        };
+
+        _localStorageMock
+            .Setup(ls => ls.GetItemAsync("lastWordId"))
+            .ReturnsAsync("5");
+
+        _repoMock.Setup(r => r.GetByIdAsync(5))
+            .ReturnsAsync(expectedWord);
+
+        // Act
+        var result = await _sut.ExecuteAsync();
+        
+        Assert.Equal(expectedWord, result);
+        _repoMock.Verify(r => r.GetByIdAsync(5), Times.Once);
+        _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
+    }
+
+    [Fact]
+    public async Task ExecuteAsync_ShouldFallbackTo1_WhenLocalStorageValueIsNotParsable()
+    {
+        var expectedWord = new WordEntity
+        {
+            Id = 1,
+            Value = "Fallback",
+            Translation = ""
+        };
+
+        _localStorageMock
+            .Setup(ls => ls.GetItemAsync("lastWordId"))
+            .ReturnsAsync("not-an-int");
+
+        _repoMock.Setup(r => r.GetByIdAsync(1))
+            .ReturnsAsync(expectedWord);
+
+        // Act
+        var result = await _sut.ExecuteAsync();
+        
+        Assert.Equal(expectedWord, result);
+        _repoMock.Verify(r => r.GetByIdAsync(1), Times.Once);
     }
 }
