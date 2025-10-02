@@ -5,6 +5,8 @@ namespace Otw.Core.Infrastructure;
 public class WordsRepository : IWordsRepository
 {
     private readonly HttpClient _httpClient;
+    
+    private static WordEntity[]? _cache;
 
     public WordsRepository(HttpClient httpClient)
     {
@@ -13,9 +15,24 @@ public class WordsRepository : IWordsRepository
     
     public async Task<WordEntity[]> GetAllAsync()
     {
-        var csvContent = await _httpClient.GetStringAsync("data/data-v1.csv");
+        if (_cache is not null)
+            return _cache;
+
+        _cache = await GetFromUrl();
         
-        var list = new List<(string English, string Polish)>();
+        return _cache;
+    }
+
+    public async Task<WordEntity?> GetByIdAsync(int id)
+    {
+        var result = (await GetAllAsync()).FirstOrDefault(x => x.Id == id);
+        return result;
+    }
+    
+    private async Task<WordEntity[]> GetFromUrl()
+    {
+        var csvContent = await _httpClient.GetStringAsync("data/data-v1.csv");
+        var words = new List<WordEntity>();
 
         // ReSharper disable once UseCollectionExpression
         var lines = csvContent.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -25,21 +42,15 @@ public class WordsRepository : IWordsRepository
             var parts = lines[i].Split(';');
             if (parts.Length >= 2)
             {
-                list.Add((parts[0].Trim(), parts[1].Trim()));
+                words.Add(new()
+                {
+                    Id = i + 1,
+                    Value = parts[0].Trim(),
+                    Translation = parts[1].Trim()
+                });
             }
         }
         
-        return list.Select((x, index) => new WordEntity
-        {
-            Id = index + 1,
-            Value = x.English,
-            Translation = x.Polish
-        }).ToArray();
-    }
-
-    public async Task<WordEntity?> GetByIdAsync(int id)
-    {
-        var result = (await GetAllAsync()).FirstOrDefault(x => x.Id == id);
-        return result;
+        return words.ToArray();
     }
 }
