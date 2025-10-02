@@ -9,8 +9,8 @@ public sealed class LastWordQueryHandler
 
     public LastWordQueryHandler(ILocalStorageService localStorage, IWordsRepository repo)
     {
-        _repo = repo;
         _localStorage = localStorage;
+        _repo = repo;
     }
     
     public async Task<WordEntity> ExecuteAsync()
