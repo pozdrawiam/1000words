@@ -44,7 +44,7 @@ else
         if (_currentWord is not null)
         {
             _currentWord = await NextWordHandler.ExecuteAsync(_currentWord.Id);
-            _showTranslation = false; // reset przy każdym nowym słowie
+            _showTranslation = false;
         }
     }
 
