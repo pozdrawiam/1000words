@@ -38,7 +38,7 @@ public class NextWordCmdHandlerTests
         _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
 
         _localStorageMock.Verify(ls => 
-            ls.SetItemAsync("lastWordId", expectedNextWord.Id.ToString()), 
+            ls.SetItemAsync("Learn_lastWordId", expectedNextWord.Id.ToString()), 
             Times.Once);
     }
 
@@ -67,7 +67,7 @@ public class NextWordCmdHandlerTests
         _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
 
         _localStorageMock.Verify(ls => 
-            ls.SetItemAsync("lastWordId", words.First().Id.ToString()), 
+            ls.SetItemAsync("Learn_lastWordId", words.First().Id.ToString()), 
             Times.Once);
     }
 
