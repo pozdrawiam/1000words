@@ -13,10 +13,9 @@
         <div class="card-body">
             <h5 class="card-title">@_currentWord.Value</h5>
 
-            @if (_showTranslation)
-            {
-                <p class="card-text">Meaning: @_currentWord.Translation</p>
-            }
+            <p class="card-text" style="visibility:@(_showTranslation ? "visible" : "hidden")">
+                Meaning: @_currentWord.Translation
+            </p>
             
             <button class="btn btn-secondary me-2" @onclick="ShowTranslation">Show translation</button>
             <button class="btn btn-primary" @onclick="LoadNextWord">Next Word</button>
