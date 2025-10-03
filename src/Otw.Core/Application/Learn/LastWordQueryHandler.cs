@@ -16,7 +16,7 @@ public sealed class LastWordQueryHandler
     public async Task<WordEntity> ExecuteAsync()
     {
         int lastWordId = 1;
-        var storedId = await _localStorage.GetItemAsync("lastWordId");
+        var storedId = await _localStorage.GetItemAsync("Learn_lastWordId");
         
         if (!string.IsNullOrEmpty(storedId) && int.TryParse(storedId, out var parsedId))
             lastWordId = parsedId;

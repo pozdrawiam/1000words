@@ -20,13 +20,13 @@ public sealed class NextWordCmdHandler
 
         if (nextWord is not null)
         {
-            await _localStorage.SetItemAsync("lastWordId", nextWord.Id.ToString());
+            await _localStorage.SetItemAsync("Learn_lastWordId", nextWord.Id.ToString());
             
             return nextWord;
         }
         
         var firstWord = (await _repo.GetAllAsync()).First();
-        await _localStorage.SetItemAsync("lastWordId", firstWord.Id.ToString());
+        await _localStorage.SetItemAsync("Learn_lastWordId", firstWord.Id.ToString());
         
         return firstWord;
     }
