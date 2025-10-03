@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Otw.Core.Application.Learn;
 using Otw.Core.Domain;
 using Otw.Core.Infrastructure;
 
@@ -9,8 +8,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        services.AddScoped<LastWordQueryHandler>();
-        services.AddScoped<NextWordCmdHandler>();
+        services.AddScoped<Application.Learn.LastWordQueryHandler>();
+        services.AddScoped<Application.Learn.NextWordCmdHandler>();
+        
+        services.AddScoped<Application.Review.LastWordQueryHandler>();
+        services.AddScoped<Application.Review.NextWordCmdHandler>();
         
         return services;
     }

@@ -1,8 +1,8 @@
 ﻿using Otw.Core.Domain;
 
-namespace Otw.Core.Application.Learn;
+namespace Otw.Core.Application.Review;
 
-public sealed class NextWordCmdHandler
+public class NextWordCmdHandler
 {
     private readonly ILocalStorageService _localStorage;
     private readonly IWordsRepository _repo;
@@ -20,13 +20,13 @@ public sealed class NextWordCmdHandler
 
         if (nextWord is not null)
         {
-            await _localStorage.SetItemAsync("Learn_lastWordId", nextWord.Id.ToString());
+            await _localStorage.SetItemAsync("Review_lastWordId", nextWord.Id.ToString());
             
             return nextWord;
         }
         
         var firstWord = (await _repo.GetAllAsync()).First();
-        await _localStorage.SetItemAsync("Learn_lastWordId", firstWord.Id.ToString());
+        await _localStorage.SetItemAsync("Review_lastWordId", firstWord.Id.ToString());
         
         return firstWord;
     }

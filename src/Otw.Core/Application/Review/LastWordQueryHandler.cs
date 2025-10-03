@@ -1,8 +1,8 @@
 ﻿using Otw.Core.Domain;
 
-namespace Otw.Core.Application.Learn;
+namespace Otw.Core.Application.Review;
 
-public sealed class LastWordQueryHandler
+public class LastWordQueryHandler
 {
     private readonly ILocalStorageService _localStorage;
     private readonly IWordsRepository _repo;
@@ -16,7 +16,7 @@ public sealed class LastWordQueryHandler
     public async Task<WordEntity> ExecuteAsync()
     {
         int lastWordId = 1;
-        var storedId = await _localStorage.GetItemAsync("Learn_lastWordId");
+        var storedId = await _localStorage.GetItemAsync("Review_lastWordId");
         
         if (!string.IsNullOrEmpty(storedId) && int.TryParse(storedId, out var parsedId))
             lastWordId = parsedId;

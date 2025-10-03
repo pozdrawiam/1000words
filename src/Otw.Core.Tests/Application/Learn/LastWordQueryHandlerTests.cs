@@ -71,7 +71,7 @@ public class LastWordQueryHandlerTests
         };
 
         _localStorageMock
-            .Setup(ls => ls.GetItemAsync("lastWordId"))
+            .Setup(ls => ls.GetItemAsync("Learn_lastWordId"))
             .ReturnsAsync("5");
 
         _repoMock.Setup(r => r.GetByIdAsync(5))
@@ -96,7 +96,7 @@ public class LastWordQueryHandlerTests
         };
 
         _localStorageMock
-            .Setup(ls => ls.GetItemAsync("lastWordId"))
+            .Setup(ls => ls.GetItemAsync("Learn_lastWordId"))
             .ReturnsAsync("not-an-int");
 
         _repoMock.Setup(r => r.GetByIdAsync(1))
