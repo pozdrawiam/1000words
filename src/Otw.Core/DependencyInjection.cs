@@ -8,11 +8,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        services.AddScoped<Application.Learn.LastWordQueryHandler>();
-        services.AddScoped<Application.Learn.NextWordCmdHandler>();
+        services.AddScoped<Application.Learn.ILastWordQueryHandler, Application.Learn.LastWordQueryHandler>();
+        services.AddScoped<Application.Learn.INextWordCmdHandler, Application.Learn.NextWordCmdHandler>();
         
-        services.AddScoped<Application.Review.LastWordQueryHandler>();
-        services.AddScoped<Application.Review.NextWordCmdHandler>();
+        services.AddScoped<Application.Review.ILastWordQueryHandler, Application.Review.LastWordQueryHandler>();
+        services.AddScoped<Application.Review.INextWordCmdHandler, Application.Review.NextWordCmdHandler>();
         
         return services;
     }
