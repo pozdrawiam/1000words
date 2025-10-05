@@ -15,8 +15,8 @@ else
         @foreach (var word in _data)
         {
             <tr>
-                <td>@word.English</td>
-                <td>@word.Polish</td>
+                <td>@word.Value</td>
+                <td>@word.Translation</td>
             </tr>
         }
         </tbody>
@@ -24,12 +24,10 @@ else
 }
 
 @code {
-    private ICollection<(string English, string Polish)>? _data;
+    private ICollection<WordEntity>? _data;
 
     protected override async Task OnInitializedAsync()
     {
-        var words = await WordsRepository.GetAllAsync();
-        
-        _data = words.Select(w => (w.Value, w.Translation)).ToList();
+        _data = await WordsRepository.GetAllAsync();
     }
 }
