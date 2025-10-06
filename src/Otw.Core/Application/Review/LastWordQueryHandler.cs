@@ -2,7 +2,12 @@
 
 namespace Otw.Core.Application.Review;
 
-public class LastWordQueryHandler
+public interface ILastWordQueryHandler
+{
+    Task<WordEntity> ExecuteAsync();
+}
+
+public class LastWordQueryHandler : ILastWordQueryHandler
 {
     private readonly ILocalStorageService _localStorage;
     private readonly IWordsRepository _repo;

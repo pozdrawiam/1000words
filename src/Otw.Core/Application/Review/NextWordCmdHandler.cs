@@ -2,7 +2,12 @@
 
 namespace Otw.Core.Application.Review;
 
-public class NextWordCmdHandler
+public interface INextWordCmdHandler
+{
+    Task<WordEntity> ExecuteAsync(int currentWordId);
+}
+
+public class NextWordCmdHandler : INextWordCmdHandler
 {
     private readonly ILocalStorageService _localStorage;
     private readonly IWordsRepository _repo;
