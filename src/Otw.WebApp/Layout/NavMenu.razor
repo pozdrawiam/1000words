@@ -1,36 +1,26 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Otw.WebApp</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+﻿<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="#">1000 words</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-    </div>
-</div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
+        <div class="@NavMenuCssClass navbar-collapse" id="mainNavbar" @onclick="ToggleNavMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="learn" Match="NavLinkMatch.All">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Learn
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="review">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Review
+                    </NavLink>
+                </li>
+            </ul>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="learn">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Learn
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="review">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Review
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="list">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> List
-            </NavLink>
-        </div>
-    </nav>
-</div>
+    </div>
+</nav>
 
 @code {
     private bool _collapseNavMenu = true;
