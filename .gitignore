@@ -420,3 +420,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 .idea/
+
+# Coverage
+src/coveragereport
