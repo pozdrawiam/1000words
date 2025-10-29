@@ -33,6 +33,7 @@ public class LearnTests : TestContext
         var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
         
         Assert.Contains("Test1", cut.Markup);
+        Assert.Contains("Test1Translation", cut.Markup);
     }
 
     [Fact]
@@ -66,5 +67,6 @@ public class LearnTests : TestContext
         await button.ClickAsync(new MouseEventArgs());
         
         Assert.Contains("Test2", cut.Markup);
+        Assert.Contains("Test2Translation", cut.Markup);
     }
 }
