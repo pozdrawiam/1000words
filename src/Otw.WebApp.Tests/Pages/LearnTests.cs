@@ -9,19 +9,19 @@ namespace Otw.WebApp.Tests.Pages;
 
 public class LearnTests : TestContext
 {
-    private readonly Mock<ILastWordQueryHandler> _lastWOrdQueryHandler = new();
+    private readonly Mock<ILastWordQueryHandler> _lastWordQueryHandler = new();
     private readonly Mock<INextWordCmdHandler> _nextWordCmdHandler = new();
     
     public LearnTests()
     {
-        Services.AddSingleton(_lastWOrdQueryHandler.Object);
+        Services.AddSingleton(_lastWordQueryHandler.Object);
         Services.AddSingleton(_nextWordCmdHandler.Object);
     }
     
     [Fact]
     public void Should_RenderCurrentWord()
     {
-        _lastWOrdQueryHandler.Setup(x => x.ExecuteAsync())
+        _lastWordQueryHandler.Setup(x => x.ExecuteAsync())
             .ReturnsAsync(new WordEntity
             {
                 Id = 1,
@@ -51,7 +51,7 @@ public class LearnTests : TestContext
             Translation = "Test2Translation"
         };
 
-        _lastWOrdQueryHandler
+        _lastWordQueryHandler
             .Setup(x => x.ExecuteAsync())
             .ReturnsAsync(firstWord);
 
