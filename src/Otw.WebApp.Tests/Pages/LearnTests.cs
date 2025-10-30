@@ -19,6 +19,27 @@ public class LearnTests : TestContext
     }
     
     [Fact]
+    public void Should_ShowLoadingMessage_BeforeDataIsLoaded()
+    {
+        _lastWordQueryHandler.Setup(x => x.ExecuteAsync())
+            .Returns(async () =>
+            {
+                await Task.Delay(10_000);
+                return new WordEntity
+                {
+                    Id = 1,
+                    Value = "Test1",
+                    Translation = "Test1Translation"
+                };
+            });
+
+        // Act
+        var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
+        
+        Assert.Contains("Loading...", cut.Markup);
+    }
+    
+    [Fact]
     public void Should_RenderCurrentWord()
     {
         _lastWordQueryHandler.Setup(x => x.ExecuteAsync())
