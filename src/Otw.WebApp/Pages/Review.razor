@@ -16,9 +16,11 @@
                     <div class="card-body">
                         <h5 class="card-title display-2 text-primary">@_currentWord.Value</h5>
                         <p class="card-text fs-3 mb-4 text-success" style="visibility:@(_showTranslation ? "visible" : "hidden")">@_currentWord.Translation</p>
-
-                        <button class="btn btn-secondary me-2" @onclick="ShowTranslation">Show translation</button>
-                        <button class="btn btn-primary" @onclick="LoadNextWord">Next Word</button>
+                        
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-secondary" @onclick="ShowTranslation">Show translation</button>
+                            <button class="btn btn-primary" @onclick="LoadNextWord">Next Word</button>
+                        </div>
                     </div>
                 </div>
             }
