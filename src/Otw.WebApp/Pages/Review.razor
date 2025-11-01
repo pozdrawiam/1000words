@@ -12,6 +12,11 @@
 
             @if (_currentWord is not null)
             {
+                <div class="progress mb-4" role="progressbar" aria-label="Progress" 
+                     aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: @ProgressPercent%">@ProgressPercent%</div>
+                </div>
+                
                 <div class="card shadow-sm text-center">
                     <div class="card-body">
                         <h5 class="card-title display-2 text-primary">@_currentWord.Value</h5>
@@ -46,6 +51,8 @@
 @code {
     private WordEntity? _currentWord;
     private bool _showTranslation;
+    
+    private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / Consts.TotalWords * 100);
     
     protected override async Task OnInitializedAsync()
     {
