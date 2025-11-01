@@ -12,7 +12,8 @@
             
             @if (_currentWord is not null)
             {
-                <div class="progress mb-4" role="progressbar" aria-label="Example with label" aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress mb-4" role="progressbar" aria-label="Progress" 
+                     aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar" style="width: @ProgressPercent%">@ProgressPercent%</div>
                 </div>
                 
