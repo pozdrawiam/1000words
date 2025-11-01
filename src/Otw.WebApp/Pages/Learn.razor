@@ -46,10 +46,8 @@
     
     private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / Consts.TotalWords * 100);
 
-    protected override async Task OnInitializedAsync()
-    {
+    protected override async Task OnInitializedAsync() => 
         _currentWord = await LastWordHandler.ExecuteAsync();
-    }
 
     private async Task LoadNextWord()
     {
