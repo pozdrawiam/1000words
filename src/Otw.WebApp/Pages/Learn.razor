@@ -42,8 +42,8 @@
 
 @code {
     private WordEntity? _currentWord;
-    private const int TotalWords = 1000;
-    private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / TotalWords * 100);
+    
+    private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / Consts.TotalWords * 100);
 
     protected override async Task OnInitializedAsync()
     {
