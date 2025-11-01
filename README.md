@@ -8,7 +8,7 @@ Projekt w trakcie, na wczesnym etapie rozwoju.
 
 ## Raport pokrycia kodu testami 
 
-Wymagane narzędzie do generowania:
+Wymagany PowerShell oraz narzędzie do generowania:
 
 ```
 dotnet tool install -g dotnet-reportgenerator-globaltool
@@ -16,5 +16,6 @@ dotnet tool install -g dotnet-reportgenerator-globaltool
 
 Użycie:
 ```
-src/covarage.cmd
+cd src
+pwsh Test-Coverage.ps1
 ```
