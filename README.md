@@ -3,8 +3,22 @@
 # 1000 słówek
 Aplikacja do nauki 1000 najpopularniejszych słówek języka angielskiego.
 
-## Status projektu
-Projekt w trakcie, na wczesnym etapie rozwoju.
+https://1000slowek.netlify.app/
+
+## Funkcje
+- tryb nauki słówek
+- tryb sprawdzania
+- automatyczny wygląd ciemny/jasny
+- postępy zapisywane w pamięci przeglądarki
+
+## Branche
+- develop: aktualne zmiany, automatyczny build i testy
+- main: automatyczny deploy na Netlify
+
+## Użyte technologie
+- .NET 8 Blazor Web Assembly
+- Bootstrap 5.3
+- testowanie xUnit, Moq, bUnit
 
 ## Raport pokrycia kodu testami 
 
