@@ -1,9 +1,18 @@
 ﻿@page "/"
+@using Otw.Core.Application
+@using Otw.Core.Domain
 @inject NavigationManager Navigation
+@inject ILocalStorageService Storage
 
 @code {
-    protected override void OnInitialized()
+    
+    protected override async Task OnInitializedAsync()
     {
-        Navigation.NavigateTo("/learn");
+        var learnStartedValue = await Storage.GetItemAsync(ApplicationConsts.LearnStartedKey);
+
+        Navigation.NavigateTo(
+            learnStartedValue == ApplicationConsts.LearnStartedValue ? 
+                "/learn" : "/about");
     }
+
 }
