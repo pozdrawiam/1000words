@@ -1,12 +1,13 @@
 ﻿@page "/about"
+@inject NavigationManager Navigation
 
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h3 class="text-center mb-4">O aplikacji</h3>
-            
+
             <p class="lead">
-                Aplikacja do nauki 
+                Aplikacja do nauki
                 <strong>1000 najpopularniejszych słówek angielskich</strong>.
                 Stworzona z myślą o osobach, które chcą w prosty i skuteczny sposób
                 poszerzyć swoje słownictwo i utrwalić podstawowe wyrażenia w języku angielskim.
@@ -22,8 +23,15 @@
             </ul>
 
             <div class="text-center mt-4">
+                <button class="btn btn-primary btn-lg"
+                        @onclick="StartLearning">
+                    Zacznij naukę
+                </button>
+            </div>
+
+            <div class="text-center mt-4">
                 <a href="https://github.com/pozdrawiam/1000words"
-                   class="" target="_blank" rel="noopener noreferrer">
+                   target="_blank" rel="noopener noreferrer">
                     Kod projektu na GitHub
                 </a>
             </div>
@@ -32,8 +40,10 @@
 </div>
 
 @code {
-    protected override void OnInitialized()
+
+    private void StartLearning()
     {
-        
+        Navigation.NavigateTo("/learn");
     }
+
 }
