@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Otw.Core.Application
 @using Otw.Core.Domain
 @inject NavigationManager Navigation
 @inject ILocalStorageService Storage
@@ -7,10 +8,10 @@
     
     protected override async Task OnInitializedAsync()
     {
-        var learnStarted = await Storage.GetItemAsync("LearnStarted");
+        var learnStartedValue = await Storage.GetItemAsync(ApplicationConsts.LearnStartedKey);
 
         Navigation.NavigateTo(
-            learnStarted == "true" ? 
+            learnStartedValue == ApplicationConsts.LearnStartedValue ? 
                 "/learn" : "/about");
     }
 

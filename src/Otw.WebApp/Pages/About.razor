@@ -1,4 +1,5 @@
 ﻿@page "/about"
+@using Otw.Core.Application
 @using Otw.Core.Domain
 @inject NavigationManager Navigation
 @inject ILocalStorageService Storage
@@ -45,7 +46,7 @@
 
     private async Task StartLearning()
     {
-        await Storage.SetItemAsync("LearnStarted", "true");
+        await Storage.SetItemAsync(ApplicationConsts.LearnStartedKey, ApplicationConsts.LearnStartedValue);
         
         Navigation.NavigateTo("/learn");
     }
