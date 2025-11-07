@@ -52,7 +52,7 @@
     private WordEntity? _currentWord;
     private bool _showTranslation;
     
-    private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / Consts.TotalWords * 100);
+    private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / DomainConsts.TotalWords * 100);
     
     protected override async Task OnInitializedAsync() => 
         _currentWord = await LastWordHandler.ExecuteAsync();
