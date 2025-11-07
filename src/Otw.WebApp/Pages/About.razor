@@ -1,5 +1,7 @@
 ﻿@page "/about"
+@using Otw.Core.Domain
 @inject NavigationManager Navigation
+@inject ILocalStorageService Storage
 
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -41,8 +43,10 @@
 
 @code {
 
-    private void StartLearning()
+    private async Task StartLearning()
     {
+        await Storage.SetItemAsync("LearnStarted", "true");
+        
         Navigation.NavigateTo("/learn");
     }
 
