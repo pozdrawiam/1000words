@@ -25,12 +25,11 @@
                         
                         <div class="d-flex justify-content-between gap-2">
                             
-                            @if (_currentWord.Id > 1) 
-                            {
-                                <button class="btn btn-secondary flex-grow-1" @onclick="LoadPreviousWord">
-                                    Previous word
-                                </button>
-                            }
+                            <button class="btn btn-secondary flex-grow-1" 
+                                    @onclick="LoadPreviousWord"
+                                    disabled="@(_currentWord.Id <= 1)">
+                                Previous word
+                            </button>
 
                             <button class="btn btn-primary flex-grow-1" @onclick="LoadNextWord">
                                 Next word
