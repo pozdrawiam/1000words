@@ -4,6 +4,7 @@
 
 @inject ILastWordQueryHandler LastWordHandler
 @inject INextWordCmdHandler NextWordHandler
+@inject IPreviousWordCmdHandler PreviousWordHandler
 
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -24,13 +25,22 @@
                            style="visibility:@(_showTranslation ? "visible" : "hidden")">
                             @_currentWord.Translation
                         </p>
-
+                        
                         <div class="d-grid gap-2">
                             @if (!_showTranslation)
                             {
                                 <button class="btn btn-success" @onclick="ShowTranslation">Show translation</button>
                             }
-                            <button class="btn btn-primary" @onclick="LoadNextWord">Next word</button>
+                            <div class="d-flex justify-content-between gap-2">
+                                <button class="btn btn-secondary flex-grow-1" 
+                                        @onclick="LoadPreviousWord"
+                                        disabled="@(_currentWord.Id <= 1)">
+                                    Previous word
+                                </button>
+                                <button class="btn btn-primary flex-grow-1" @onclick="LoadNextWord">
+                                    Next word
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,6 +72,15 @@
         if (_currentWord is not null)
         {
             _currentWord = await NextWordHandler.ExecuteAsync(_currentWord.Id);
+            _showTranslation = false;
+        }
+    }
+    
+    private async Task LoadPreviousWord()
+    {
+        if (_currentWord is not null && _currentWord.Id > 1)
+        {
+            _currentWord = await PreviousWordHandler.ExecuteAsync(_currentWord.Id);
             _showTranslation = false;
         }
     }
