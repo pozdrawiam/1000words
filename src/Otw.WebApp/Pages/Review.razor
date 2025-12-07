@@ -29,16 +29,18 @@
                         <div class="d-grid gap-2">
                             @if (!_showTranslation)
                             {
-                                <button class="btn btn-success" @onclick="ShowTranslation">Show translation</button>
+                                <button class="btn btn-success" @onclick="ShowTranslation">
+                                    <i class="bi bi-translate"></i> Show translation
+                                </button>
                             }
                             <div class="d-flex justify-content-between gap-2">
                                 <button class="btn btn-secondary flex-grow-1" 
                                         @onclick="LoadPreviousWord"
                                         disabled="@(_currentWord.Id <= 1)">
-                                    Previous word
+                                    <i class="bi bi-arrow-left"></i> Previous word
                                 </button>
                                 <button class="btn btn-primary flex-grow-1" @onclick="LoadNextWord">
-                                    Next word
+                                    Next word <i class="bi bi-arrow-right"></i>
                                 </button>
                             </div>
                         </div>

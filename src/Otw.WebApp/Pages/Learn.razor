@@ -27,10 +27,10 @@
                             <button class="btn btn-secondary flex-grow-1" 
                                     @onclick="LoadPreviousWord"
                                     disabled="@(_currentWord.Id <= 1)">
-                                Previous word
+                                <i class="bi bi-arrow-left"></i> Previous word
                             </button>
                             <button class="btn btn-primary flex-grow-1" @onclick="LoadNextWord">
-                                Next word
+                                Next word <i class="bi bi-arrow-right"></i>
                             </button>
                         </div>
                     </div>
