@@ -1,9 +1,11 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.Extensions.Localization
+@inherits LayoutComponentBase
+@inject IStringLocalizer<Resources.Layout.MainLayout> Localizer
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#"><i class="bi bi-list-check"></i> 1000 words</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation" @onclick="ToggleNavMenu">
+        <a class="navbar-brand" href="#"><i class="bi bi-list-check"></i> @Localizer["AppName"]</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="@Localizer["ToggleNav"]" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -11,17 +13,17 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="about">
-                        <i class="bi bi-info-square"></i> About
+                        <i class="bi bi-info-square"></i> @Localizer["About"]
                     </NavLink>
                 </li>
                 <li class="nav-item">
                     <NavLink class="nav-link" href="learn" Match="NavLinkMatch.All">
-                        <i class="bi bi-book"></i> Learn
+                        <i class="bi bi-book"></i> @Localizer["Learn"]
                     </NavLink>
                 </li>
                 <li class="nav-item">
                     <NavLink class="nav-link" href="review">
-                        <i class="bi bi-journal-check"></i> Review
+                        <i class="bi bi-journal-check"></i> @Localizer["Review"]
                     </NavLink>
                 </li>
             </ul>

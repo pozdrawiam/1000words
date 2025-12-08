@@ -14,4 +14,19 @@
       <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Layout\MainLayout.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MainLayout.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Layout\MainLayout.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MainLayout.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
