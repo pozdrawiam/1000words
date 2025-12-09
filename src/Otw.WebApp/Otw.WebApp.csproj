@@ -19,6 +19,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>MainLayout.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Learn.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Learn.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -26,6 +30,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>MainLayout.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Learn.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Learn.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -1,6 +1,9 @@
 ﻿@page "/learn"
+@using Microsoft.Extensions.Localization
 @using Otw.Core.Application.Learn
 @using Otw.Core.Domain
+
+@inject IStringLocalizer<Resources.Pages.Learn> Loc
 
 @inject ILastWordQueryHandler LastWordHandler
 @inject INextWordCmdHandler NextWordHandler
@@ -9,11 +12,11 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h3 class="text-center mb-4">Learn mode</h3>
+            <h3 class="text-center mb-4">@Loc["Title"]</h3>
             
             @if (_currentWord is not null)
             {
-                <div class="progress mb-4" role="progressbar" aria-label="Progress" 
+                <div class="progress mb-4" role="progressbar" aria-label="@Loc["Progress"]" 
                      aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar" style="width: @ProgressPercent%">@ProgressPercent%</div>
                 </div>
@@ -27,10 +30,10 @@
                             <button class="btn btn-secondary flex-grow-1" 
                                     @onclick="LoadPreviousWord"
                                     disabled="@(_currentWord.Id <= 1)">
-                                <i class="bi bi-arrow-left"></i> Previous word
+                                <i class="bi bi-arrow-left"></i> @Loc["PreviousWord"]
                             </button>
                             <button class="btn btn-primary flex-grow-1" @onclick="LoadNextWord">
-                                Next word <i class="bi bi-arrow-right"></i>
+                                @Loc["NextWord"] <i class="bi bi-arrow-right"></i>
                             </button>
                         </div>
                     </div>
