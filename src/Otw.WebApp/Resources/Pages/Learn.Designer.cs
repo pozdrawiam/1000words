@@ -14,7 +14,7 @@ namespace Otw.WebApp.Resources.Pages {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Learn {
+    public class Learn {
         
         private static System.Resources.ResourceManager resourceMan;
         
@@ -25,7 +25,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
+        public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
                     System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Otw.WebApp.Resources.Pages.Learn", typeof(Learn).Assembly);
@@ -36,7 +36,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -45,25 +45,25 @@ namespace Otw.WebApp.Resources.Pages {
             }
         }
         
-        internal static string Title {
+        public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
-        internal static string Progress {
+        public static string Progress {
             get {
                 return ResourceManager.GetString("Progress", resourceCulture);
             }
         }
         
-        internal static string PreviousWord {
+        public static string PreviousWord {
             get {
                 return ResourceManager.GetString("PreviousWord", resourceCulture);
             }
         }
         
-        internal static string NextWord {
+        public static string NextWord {
             get {
                 return ResourceManager.GetString("NextWord", resourceCulture);
             }

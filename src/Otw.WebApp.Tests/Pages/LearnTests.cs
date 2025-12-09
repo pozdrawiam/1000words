@@ -1,6 +1,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Moq;
 using Otw.Core.Application.Learn;
 using Otw.Core.Domain;
@@ -9,12 +10,14 @@ namespace Otw.WebApp.Tests.Pages;
 
 public class LearnTests : TestContext
 {
+    private readonly Mock<IStringLocalizer<Resources.Pages.Learn>> _localizer = new();
     private readonly Mock<ILastWordQueryHandler> _lastWordQueryHandler = new();
     private readonly Mock<INextWordCmdHandler> _nextWordCmdHandler = new();
     private readonly Mock<IPreviousWordCmdHandler> _previousWordCmdHandler = new();
     
     public LearnTests()
     {
+        Services.AddSingleton(_localizer.Object);
         Services.AddSingleton(_lastWordQueryHandler.Object);
         Services.AddSingleton(_nextWordCmdHandler.Object);
         Services.AddSingleton(_previousWordCmdHandler.Object);
