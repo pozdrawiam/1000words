@@ -26,6 +26,9 @@ public class LearnTests : TestContext
     [Fact]
     public void Should_ShowLoadingMessage_BeforeDataIsLoaded()
     {
+        _localizer.Setup(x => x["Loading"])
+            .Returns(new LocalizedString("Loading", "Test loading message"));
+        
         _lastWordQueryHandler.Setup(x => x.ExecuteAsync())
             .Returns(async () =>
             {
@@ -41,7 +44,7 @@ public class LearnTests : TestContext
         // Act
         var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
         
-        Assert.Contains("Loading...", cut.Markup);
+        Assert.Contains("Test loading message", cut.Markup);
     }
     
     [Fact]
