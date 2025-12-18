@@ -1,6 +1,9 @@
 ﻿@page "/review"
+@using Microsoft.Extensions.Localization
 @using Otw.Core.Application.Review
 @using Otw.Core.Domain
+
+@inject IStringLocalizer<Resources.Pages.Review> Loc
 
 @inject ILastWordQueryHandler LastWordHandler
 @inject INextWordCmdHandler NextWordHandler

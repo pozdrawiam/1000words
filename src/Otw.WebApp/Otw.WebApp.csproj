@@ -23,6 +23,10 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Learn.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Review.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Review.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -35,6 +39,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Learn.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Review.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Review.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
