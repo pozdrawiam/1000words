@@ -105,7 +105,16 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn mode.
+        ///   Looks up a localized string similar to Show translation.
+        /// </summary>
+        public static string ShowTranslation {
+            get {
+                return ResourceManager.GetString("ShowTranslation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review mode.
         /// </summary>
         public static string Title {
             get {
