@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="AppName" xml:space="preserve">
-        <value>1000 słów</value>
+        <value>1000 słówek angielskiego</value>
     </data>
     <data name="About" xml:space="preserve">
         <value>O aplikacji</value>
@@ -28,7 +28,7 @@
         <value>Nauka</value>
     </data>
     <data name="Review" xml:space="preserve">
-        <value>Powtórka</value>
+        <value>Sprawdź się</value>
     </data>
     <data name="ToggleNav" xml:space="preserve">
         <value>Przełącz nawigację</value>

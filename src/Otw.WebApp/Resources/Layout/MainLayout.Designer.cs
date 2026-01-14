@@ -69,7 +69,7 @@ namespace Otw.WebApp.Resources.Layout {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1000 słów.
+        ///   Looks up a localized string similar to 1000 słówek angielskiego.
         /// </summary>
         internal static string AppName {
             get {
@@ -87,7 +87,7 @@ namespace Otw.WebApp.Resources.Layout {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Powtórka.
+        ///   Looks up a localized string similar to Sprawdź się.
         /// </summary>
         internal static string Review {
             get {
