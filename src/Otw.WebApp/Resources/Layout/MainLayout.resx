@@ -19,18 +19,18 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="AppName" xml:space="preserve">
-        <value>1000 words</value>
+        <value>1000 słów</value>
     </data>
     <data name="About" xml:space="preserve">
-        <value>About</value>
+        <value>O aplikacji</value>
     </data>
     <data name="Learn" xml:space="preserve">
-        <value>Learn</value>
+        <value>Nauka</value>
     </data>
     <data name="Review" xml:space="preserve">
-        <value>Review</value>
+        <value>Powtórka</value>
     </data>
     <data name="ToggleNav" xml:space="preserve">
-        <value>Toggle navigation</value>
+        <value>Przełącz nawigację</value>
     </data>
 </root>

@@ -60,7 +60,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading ....
+        ///   Looks up a localized string similar to Ładowanie ....
         /// </summary>
         public static string Loading {
             get {
@@ -69,7 +69,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading data ....
+        ///   Looks up a localized string similar to Ładowanie danych ....
         /// </summary>
         public static string LoadingData {
             get {
@@ -78,7 +78,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next word.
+        ///   Looks up a localized string similar to Następne słowo.
         /// </summary>
         public static string NextWord {
             get {
@@ -87,7 +87,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Previous word.
+        ///   Looks up a localized string similar to Poprzednie słowo.
         /// </summary>
         public static string PreviousWord {
             get {
@@ -96,7 +96,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Progress.
+        ///   Looks up a localized string similar to Postęp.
         /// </summary>
         public static string Progress {
             get {
@@ -105,7 +105,7 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn mode.
+        ///   Looks up a localized string similar to Tryb nauki.
         /// </summary>
         public static string Title {
             get {

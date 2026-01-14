@@ -19,24 +19,24 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Title" xml:space="preserve">
-        <value>Review mode</value>
+        <value>Tryb powtórek</value>
     </data>
     <data name="Progress" xml:space="preserve">
-        <value>Progress</value>
+        <value>Postęp</value>
     </data>
     <data name="PreviousWord" xml:space="preserve">
-        <value>Previous word</value>
+        <value>Poprzednie słowo</value>
     </data>
     <data name="NextWord" xml:space="preserve">
-        <value>Next word</value>
+        <value>Następne słowo</value>
     </data>
     <data name="Loading" xml:space="preserve">
-        <value>Loading ...</value>
+        <value>Ładowanie ...</value>
     </data>
     <data name="LoadingData" xml:space="preserve">
-        <value>Loading data ...</value>
+        <value>Ładowanie danych ...</value>
     </data>
     <data name="ShowTranslation" xml:space="preserve">
-        <value>Show translation</value>
+        <value>Pokaż tłumaczenie</value>
     </data>
 </root>
