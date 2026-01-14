@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Title" xml:space="preserve">
+        <value>O aplikacji</value>
+    </data>
+    <data name="DescriptionPart1" xml:space="preserve">
+        <value>Aplikacja do nauki</value>
+    </data>
+    <data name="DescriptionHighlight" xml:space="preserve">
+        <value>1000 najpopularniejszych słówek angielskich</value>
+    </data>
+    <data name="DescriptionPart2" xml:space="preserve">
+        <value>Stworzona z myślą o osobach, które chcą w prosty i skuteczny sposób poszerzyć swoje słownictwo i utrwalić podstawowe wyrażenia w języku angielskim.</value>
+    </data>
+    <data name="FeaturesTitle" xml:space="preserve">
+        <value>Funkcje</value>
+    </data>
+    <data name="Feature1" xml:space="preserve">
+        <value>tryb nauki</value>
+    </data>
+    <data name="Feature2" xml:space="preserve">
+        <value>tryb sprawdzania</value>
+    </data>
+    <data name="Feature3" xml:space="preserve">
+        <value>zapamiętywanie postępu w pamięci przeglądarki</value>
+    </data>
+    <data name="Feature4" xml:space="preserve">
+        <value>responsywny interfejs – działa zarówno na komputerze, jak i telefonie</value>
+    </data>
+    <data name="Feature5" xml:space="preserve">
+        <value>automatyczny wygląd ciemny/jasny</value>
+    </data>
+    <data name="StepsTitle" xml:space="preserve">
+        <value>Nauka angielskiego jest prosta</value>
+    </data>
+    <data name="Step1" xml:space="preserve">
+        <value>Znajdź i opanuj podręcznik, aby poznać podstawy - może być PDF z internetu.</value>
+    </data>
+    <data name="Step2" xml:space="preserve">
+        <value>Poznaj 1000 najpopularniejszych słów, aby rozumieć codzienne rozmowy.</value>
+    </data>
+    <data name="Step3" xml:space="preserve">
+        <value>Osłuchaj się - oglądaj filmy o interesujących Cię tematach z napisami po angielsku.</value>
+    </data>
+    <data name="Step4" xml:space="preserve">
+        <value>Zacznij mówić - powtarzaj zdania z filmów na głos.</value>
+    </data>
+    <data name="StartLearningBtn" xml:space="preserve">
+        <value>Zacznij naukę słówek</value>
+    </data>
+    <data name="GitHubLink" xml:space="preserve">
+        <value>Kod projektu na GitHub</value>
+    </data>
+</root>

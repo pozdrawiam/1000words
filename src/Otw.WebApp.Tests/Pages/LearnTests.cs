@@ -1,6 +1,7 @@
 using Bunit;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Moq;
 using Otw.Core.Application.Learn;
 using Otw.Core.Domain;
@@ -9,12 +10,14 @@ namespace Otw.WebApp.Tests.Pages;
 
 public class LearnTests : TestContext
 {
+    private readonly Mock<IStringLocalizer<Resources.Pages.Learn>> _localizer = new();
     private readonly Mock<ILastWordQueryHandler> _lastWordQueryHandler = new();
     private readonly Mock<INextWordCmdHandler> _nextWordCmdHandler = new();
     private readonly Mock<IPreviousWordCmdHandler> _previousWordCmdHandler = new();
     
     public LearnTests()
     {
+        Services.AddSingleton(_localizer.Object);
         Services.AddSingleton(_lastWordQueryHandler.Object);
         Services.AddSingleton(_nextWordCmdHandler.Object);
         Services.AddSingleton(_previousWordCmdHandler.Object);
@@ -23,6 +26,9 @@ public class LearnTests : TestContext
     [Fact]
     public void Should_ShowLoadingMessage_BeforeDataIsLoaded()
     {
+        _localizer.Setup(x => x["Loading"])
+            .Returns(new LocalizedString("Loading", "Test loading message"));
+        
         _lastWordQueryHandler.Setup(x => x.ExecuteAsync())
             .Returns(async () =>
             {
@@ -38,7 +44,7 @@ public class LearnTests : TestContext
         // Act
         var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
         
-        Assert.Contains("Loading...", cut.Markup);
+        Assert.Contains("Test loading message", cut.Markup);
     }
     
     [Fact]

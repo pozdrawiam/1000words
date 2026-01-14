@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
+    
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.20"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.20" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.22" />
     </ItemGroup>
 
     <ItemGroup>
@@ -11,6 +12,48 @@
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Layout\MainLayout.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MainLayout.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Learn.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Learn.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Review.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Review.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\About.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>About.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Layout\MainLayout.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MainLayout.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Learn.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Learn.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Review.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Review.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\About.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>About.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
