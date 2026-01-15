@@ -28,13 +28,13 @@
         <value>Możesz zresetować postęp w każdym trybie osobno. Ta operacja jest nieodwracalna.</value>
     </data>
     <data name="LearnMode" xml:space="preserve">
-        <value>Tryb nauki</value>
+        <value>Nauka</value>
     </data>
     <data name="LearnModeDescription" xml:space="preserve">
         <value>Resetuj postęp w trybie nauki</value>
     </data>
     <data name="ReviewMode" xml:space="preserve">
-        <value>Tryb powtórek</value>
+        <value>Sprawdź się</value>
     </data>
     <data name="ReviewModeDescription" xml:space="preserve">
         <value>Resetuj postęp w trybie powtórek</value>
