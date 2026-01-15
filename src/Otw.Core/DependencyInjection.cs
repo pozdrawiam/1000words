@@ -11,10 +11,12 @@ public static class DependencyInjection
         services.AddScoped<Application.Learn.ILastWordQueryHandler, Application.Learn.LastWordQueryHandler>();
         services.AddScoped<Application.Learn.INextWordCmdHandler, Application.Learn.NextWordCmdHandler>();
         services.AddScoped<Application.Learn.IPreviousWordCmdHandler, Application.Learn.PreviousWordCmdHandler>();
+        services.AddScoped<Application.Learn.IResetProgressCmdHandler, Application.Learn.ResetProgressCmdHandler>();
         
         services.AddScoped<Application.Review.ILastWordQueryHandler, Application.Review.LastWordQueryHandler>();
         services.AddScoped<Application.Review.INextWordCmdHandler, Application.Review.NextWordCmdHandler>();
         services.AddScoped<Application.Review.IPreviousWordCmdHandler, Application.Review.PreviousWordCmdHandler>();
+        services.AddScoped<Application.Review.IResetProgressCmdHandler, Application.Review.ResetProgressCmdHandler>();
         
         return services;
     }

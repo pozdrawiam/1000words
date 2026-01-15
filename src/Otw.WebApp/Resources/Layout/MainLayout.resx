@@ -33,4 +33,7 @@
     <data name="ToggleNav" xml:space="preserve">
         <value>Przełącz nawigację</value>
     </data>
+    <data name="Settings" xml:space="preserve">
+        <value>Ustawienia</value>
+    </data>
 </root>
