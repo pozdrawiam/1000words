@@ -17,4 +17,7 @@ public class LocalStorageService : ILocalStorageService
 
     public ValueTask<string?> GetItemAsync(string key) =>
         _jsRuntime.InvokeAsync<string?>("localStorage.getItem", key);
+
+    public ValueTask RemoveItemAsync(string key) =>
+        _jsRuntime.InvokeVoidAsync("localStorage.removeItem", key);
 }

@@ -31,6 +31,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>About.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Settings.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -53,6 +57,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>About.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Settings.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
