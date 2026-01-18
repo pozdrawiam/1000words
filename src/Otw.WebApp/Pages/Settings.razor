@@ -26,7 +26,7 @@
                     <div class="d-grid gap-3">
                         <div class="p-3 border rounded">
                             <h6 class="mb-3">@Loc["LearnMode"]</h6>
-                            <select class="form-select" value="@LearnSortType" @onchange="OnLearnSortTypeChanged">
+                            <select class="form-select" value="@_learnSortType" @onchange="OnLearnSortTypeChanged">
                                 <option value="@WordSortType.Default">Domyślnie</option>
                                 <option value="@WordSortType.AlphabeticalAsc">Alfabetycznie (A-Z)</option>
                                 <option value="@WordSortType.AlphabeticalDesc">Alfabetycznie (Z-A)</option>
@@ -36,7 +36,7 @@
 
                         <div class="p-3 border rounded">
                             <h6 class="mb-3">@Loc["ReviewMode"]</h6>
-                            <select class="form-select" value="@ReviewSortType" @onchange="OnReviewSortTypeChanged">
+                            <select class="form-select" value="@_reviewSortType" @onchange="OnReviewSortTypeChanged">
                                 <option value="@WordSortType.Default">Domyślnie</option>
                                 <option value="@WordSortType.AlphabeticalAsc">Alfabetycznie (A-Z)</option>
                                 <option value="@WordSortType.AlphabeticalDesc">Alfabetycznie (Z-A)</option>
@@ -83,20 +83,20 @@
 </div>
 
 @code {
-    private WordSortType LearnSortType { get; set; }
-    private WordSortType ReviewSortType { get; set; }
+    private WordSortType _learnSortType;
+    private WordSortType _reviewSortType;
 
     protected override async Task OnInitializedAsync()
     {
-        LearnSortType = await LearnSortTypeQueryHandler.ExecuteAsync();
-        ReviewSortType = await ReviewSortTypeQueryHandler.ExecuteAsync();
+        _learnSortType = await LearnSortTypeQueryHandler.ExecuteAsync();
+        _reviewSortType = await ReviewSortTypeQueryHandler.ExecuteAsync();
     }
 
     private async Task OnLearnSortTypeChanged(ChangeEventArgs e)
     {
         if (Enum.TryParse<WordSortType>(e.Value?.ToString(), out var result))
         {
-            LearnSortType = result;
+            _learnSortType = result;
             await SetLearSortTypeCmdHandler.ExecuteAsync(result);
         }
     }
@@ -105,7 +105,7 @@
     {
         if (Enum.TryParse<WordSortType>(e.Value?.ToString(), out var result))
         {
-            ReviewSortType = result;
+            _reviewSortType = result;
             await SetReviewSortTypeCmdHandler.ExecuteAsync(result);
         }
     }
