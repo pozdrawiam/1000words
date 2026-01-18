@@ -1,9 +1,14 @@
 @page "/settings"
 @using Microsoft.Extensions.Localization
+@using Otw.Core.Domain
 
 @inject IStringLocalizer<Resources.Pages.Settings> Loc
 @inject Otw.Core.Application.Learn.IResetProgressCmdHandler LearnResetHandler
 @inject Otw.Core.Application.Review.IResetProgressCmdHandler ReviewResetHandler
+@inject Otw.Core.Application.Settings.ILearnSortTypeQueryHandler LearnSortTypeQueryHandler
+@inject Otw.Core.Application.Settings.ISetLearSortTypeCmdHandler SetLearSortTypeCmdHandler
+@inject Otw.Core.Application.Settings.IReviewSortTypeQueryHandler ReviewSortTypeQueryHandler
+@inject Otw.Core.Application.Settings.ISetReviewSortTypeCmdHandler SetReviewSortTypeCmdHandler
 @inject NavigationManager Navigation
 @inject IJSRuntime JsRuntime
 
@@ -21,21 +26,21 @@
                     <div class="d-grid gap-3">
                         <div class="p-3 border rounded">
                             <h6 class="mb-3">@Loc["LearnMode"]</h6>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" value="@LearnSortType" @onchange="OnLearnSortTypeChanged">
+                                <option value="@WordSortType.Default">Domyślnie</option>
+                                <option value="@WordSortType.AlphabeticalAsc">Alfabetycznie (A-Z)</option>
+                                <option value="@WordSortType.AlphabeticalDesc">Alfabetycznie (Z-A)</option>
+                                <option value="@WordSortType.Random">Losowo</option>
                             </select>
                         </div>
 
                         <div class="p-3 border rounded">
                             <h6 class="mb-3">@Loc["ReviewMode"]</h6>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" value="@ReviewSortType" @onchange="OnReviewSortTypeChanged">
+                                <option value="@WordSortType.Default">Domyślnie</option>
+                                <option value="@WordSortType.AlphabeticalAsc">Alfabetycznie (A-Z)</option>
+                                <option value="@WordSortType.AlphabeticalDesc">Alfabetycznie (Z-A)</option>
+                                <option value="@WordSortType.Random">Losowo</option>
                             </select>
                         </div>
                     </div>
@@ -78,6 +83,33 @@
 </div>
 
 @code {
+    private WordSortType LearnSortType { get; set; }
+    private WordSortType ReviewSortType { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        LearnSortType = await LearnSortTypeQueryHandler.ExecuteAsync();
+        ReviewSortType = await ReviewSortTypeQueryHandler.ExecuteAsync();
+    }
+
+    private async Task OnLearnSortTypeChanged(ChangeEventArgs e)
+    {
+        if (Enum.TryParse<WordSortType>(e.Value?.ToString(), out var result))
+        {
+            LearnSortType = result;
+            await SetLearSortTypeCmdHandler.ExecuteAsync(result);
+        }
+    }
+
+    private async Task OnReviewSortTypeChanged(ChangeEventArgs e)
+    {
+        if (Enum.TryParse<WordSortType>(e.Value?.ToString(), out var result))
+        {
+            ReviewSortType = result;
+            await SetReviewSortTypeCmdHandler.ExecuteAsync(result);
+        }
+    }
+
     private async Task ResetLearnProgress()
     {
         var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", Loc["ResetLearnConfirm"].Value);

@@ -1,18 +1,18 @@
-﻿using Otw.Core.Domain;
+using Otw.Core.Domain;
 
 namespace Otw.Core.Application.Settings;
 
-public interface ILearnSortTypeQueryHandler
+public interface IReviewSortTypeQueryHandler
 {
     Task<WordSortType> ExecuteAsync();
 }
 
-public class LearnSortTypeQueryHandler : ILearnSortTypeQueryHandler
+public class ReviewSortTypeQueryHandler : IReviewSortTypeQueryHandler
 {
-    private const string Key = "Learn_WordSortType";
+    private const string Key = "Review_WordSortType";
     private readonly ILocalStorageService _localStorage;
 
-    public LearnSortTypeQueryHandler(ILocalStorageService localStorage)
+    public ReviewSortTypeQueryHandler(ILocalStorageService localStorage)
     {
         _localStorage = localStorage;
     }

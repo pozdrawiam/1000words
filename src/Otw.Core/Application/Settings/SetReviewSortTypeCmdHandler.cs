@@ -1,18 +1,18 @@
-﻿using Otw.Core.Domain;
+using Otw.Core.Domain;
 
 namespace Otw.Core.Application.Settings;
 
-public interface ISetLearSortTypeCmdHandler
+public interface ISetReviewSortTypeCmdHandler
 {
     Task ExecuteAsync(WordSortType sortType);
 }
 
-public class SetLearSortTypeCmdHandler : ISetLearSortTypeCmdHandler
+public class SetReviewSortTypeCmdHandler : ISetReviewSortTypeCmdHandler
 {
-    private const string Key = "Learn_WordSortType";
+    private const string Key = "Review_WordSortType";
     private readonly ILocalStorageService _localStorage;
 
-    public SetLearSortTypeCmdHandler(ILocalStorageService localStorage)
+    public SetReviewSortTypeCmdHandler(ILocalStorageService localStorage)
     {
         _localStorage = localStorage;
     }
