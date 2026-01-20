@@ -31,6 +31,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ILocalStorageService, LocalStorageService>();
         services.AddScoped<IWordsRepository, WordsRepository>();
+        services.AddScoped<IParametersRepository, ParametersRepository>();
         
         return services;
     }
