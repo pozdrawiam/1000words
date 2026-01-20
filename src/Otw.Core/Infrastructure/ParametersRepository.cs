@@ -6,6 +6,9 @@ public class ParametersRepository : IParametersRepository
 {
     private readonly ILocalStorageService _localStorage;
 
+    private const string LearnStartedKey = "learnStarted";
+    private const string LearnStartedValue = "true";
+    
     private const string LearnLastWordIdKey = "Learn_lastWordId";
     private const string ReviewLastWordIdKey = "Review_lastWordId";
     private const string LearnWordSortTypeKey = "Learn_WordSortType";
@@ -88,12 +91,12 @@ public class ParametersRepository : IParametersRepository
 
     public async Task<bool> IsLearnStartedAsync()
     {
-        var value = await _localStorage.GetItemAsync(Application.ApplicationConsts.LearnStartedKey);
-        return value == Application.ApplicationConsts.LearnStartedValue;
+        var value = await _localStorage.GetItemAsync(LearnStartedKey);
+        return value == LearnStartedValue;
     }
 
     public async Task SetLearnStartedAsync()
     {
-        await _localStorage.SetItemAsync(Application.ApplicationConsts.LearnStartedKey, Application.ApplicationConsts.LearnStartedValue);
+        await _localStorage.SetItemAsync(LearnStartedKey, LearnStartedValue);
     }
 }
