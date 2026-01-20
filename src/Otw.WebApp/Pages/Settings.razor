@@ -4,12 +4,14 @@
 @using Otw.Core.Domain
 
 @inject IStringLocalizer<Resources.Pages.Settings> Loc
+
 @inject IResetLearnProgressCmdHandler LearnResetHandler
 @inject IResetReviewProgressCmdHandler ReviewResetReviewHandler
-@inject Otw.Core.Application.Settings.ILearnSortTypeQueryHandler LearnSortTypeQueryHandler
-@inject Otw.Core.Application.Settings.ISetLearSortTypeCmdHandler SetLearSortTypeCmdHandler
-@inject Otw.Core.Application.Settings.IReviewSortTypeQueryHandler ReviewSortTypeQueryHandler
-@inject Otw.Core.Application.Settings.ISetReviewSortTypeCmdHandler SetReviewSortTypeCmdHandler
+@inject ILearnSortTypeQueryHandler LearnSortTypeQueryHandler
+@inject ISetLearSortTypeCmdHandler SetLearSortTypeCmdHandler
+@inject IReviewSortTypeQueryHandler ReviewSortTypeQueryHandler
+@inject ISetReviewSortTypeCmdHandler SetReviewSortTypeCmdHandler
+
 @inject NavigationManager Navigation
 @inject IJSRuntime JsRuntime
 

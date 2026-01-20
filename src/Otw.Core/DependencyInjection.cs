@@ -17,11 +17,11 @@ public static class DependencyInjection
         services.AddScoped<Application.Review.INextWordCmdHandler, Application.Review.NextWordCmdHandler>();
         services.AddScoped<Application.Review.IPreviousWordCmdHandler, Application.Review.PreviousWordCmdHandler>();
         
-        services.AddScoped<Application.Settings.ILearnSortTypeQueryHandler, Application.Settings.LearnSortTypeQueryHandler>();
-        services.AddScoped<Application.Settings.ISetLearSortTypeCmdHandler, Application.Settings.SetLearSortTypeCmdHandler>();
+        services.AddScoped<ILearnSortTypeQueryHandler, LearnSortTypeQueryHandler>();
+        services.AddScoped<ISetLearSortTypeCmdHandler, SetLearSortTypeCmdHandler>();
         services.AddScoped<IResetLearnProgressCmdHandler, ResetLearnProgressCmdHandler>();
-        services.AddScoped<Application.Settings.IReviewSortTypeQueryHandler, Application.Settings.ReviewSortTypeQueryHandler>();
-        services.AddScoped<Application.Settings.ISetReviewSortTypeCmdHandler, Application.Settings.SetReviewSortTypeCmdHandler>();
+        services.AddScoped<IReviewSortTypeQueryHandler, ReviewSortTypeQueryHandler>();
+        services.AddScoped<ISetReviewSortTypeCmdHandler, SetReviewSortTypeCmdHandler>();
         services.AddScoped<IResetReviewProgressCmdHandler, ResetReviewProgressCmdHandler>();
         
         return services;
