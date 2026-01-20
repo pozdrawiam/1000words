@@ -1,5 +1,3 @@
-using Otw.Core.Domain;
-
 namespace Otw.Core.Domain;
 
 public interface IParametersRepository
