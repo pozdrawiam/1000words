@@ -10,8 +10,9 @@ public class ParametersRepository : IParametersRepository
     private const string LearnStartedValue = "true";
     
     private const string LearnLastWordIdKey = "Learn_lastWordId";
-    private const string ReviewLastWordIdKey = "Review_lastWordId";
     private const string LearnWordSortTypeKey = "Learn_WordSortType";
+    
+    private const string ReviewLastWordIdKey = "Review_lastWordId";
     private const string ReviewWordSortTypeKey = "Review_WordSortType";
 
     public ParametersRepository(ILocalStorageService localStorage)
