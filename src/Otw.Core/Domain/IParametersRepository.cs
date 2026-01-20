@@ -14,4 +14,6 @@ public interface IParametersRepository
     Task SetReviewSortTypeAsync(WordSortType sortType);
     Task ResetLearnProgressAsync();
     Task ResetReviewProgressAsync();
+    Task<bool> IsLearnStartedAsync();
+    Task SetLearnStartedAsync();
 }

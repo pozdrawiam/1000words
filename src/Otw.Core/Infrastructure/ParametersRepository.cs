@@ -85,4 +85,15 @@ public class ParametersRepository : IParametersRepository
     {
         await _localStorage.RemoveItemAsync(ReviewLastWordIdKey);
     }
+
+    public async Task<bool> IsLearnStartedAsync()
+    {
+        var value = await _localStorage.GetItemAsync(Application.ApplicationConsts.LearnStartedKey);
+        return value == Application.ApplicationConsts.LearnStartedValue;
+    }
+
+    public async Task SetLearnStartedAsync()
+    {
+        await _localStorage.SetItemAsync(Application.ApplicationConsts.LearnStartedKey, Application.ApplicationConsts.LearnStartedValue);
+    }
 }
