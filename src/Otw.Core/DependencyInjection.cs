@@ -7,7 +7,7 @@ namespace Otw.Core;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDomain(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<Application.Learn.ILastWordQueryHandler, Application.Learn.LastWordQueryHandler>();
         services.AddScoped<Application.Learn.INextWordCmdHandler, Application.Learn.NextWordCmdHandler>();
