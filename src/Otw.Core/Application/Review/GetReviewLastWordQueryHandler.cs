@@ -2,17 +2,17 @@
 
 namespace Otw.Core.Application.Review;
 
-public interface ILastWordQueryHandler
+public interface IGetReviewLastWordQueryHandler
 {
     Task<WordEntity> ExecuteAsync();
 }
 
-public class LastWordQueryHandler : ILastWordQueryHandler
+public class GetReviewLastWordQueryHandler : IGetReviewLastWordQueryHandler
 {
     private readonly IParametersRepository _parameters;
     private readonly IWordsRepository _repo;
 
-    public LastWordQueryHandler(IParametersRepository parameters, IWordsRepository repo)
+    public GetReviewLastWordQueryHandler(IParametersRepository parameters, IWordsRepository repo)
     {
         _parameters = parameters;
         _repo = repo;

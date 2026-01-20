@@ -9,11 +9,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<Application.Learn.ILastWordQueryHandler, Application.Learn.LastWordQueryHandler>();
+        services.AddScoped<Application.Learn.IGetLearnLastWordQueryHandler, Application.Learn.GetLearnLastWordQueryHandler>();
         services.AddScoped<Application.Learn.INextWordCmdHandler, Application.Learn.NextWordCmdHandler>();
         services.AddScoped<Application.Learn.IPreviousWordCmdHandler, Application.Learn.PreviousWordCmdHandler>();
         
-        services.AddScoped<Application.Review.ILastWordQueryHandler, Application.Review.LastWordQueryHandler>();
+        services.AddScoped<Application.Review.IGetReviewLastWordQueryHandler, Application.Review.GetReviewLastWordQueryHandler>();
         services.AddScoped<Application.Review.INextWordCmdHandler, Application.Review.NextWordCmdHandler>();
         services.AddScoped<Application.Review.IPreviousWordCmdHandler, Application.Review.PreviousWordCmdHandler>();
         

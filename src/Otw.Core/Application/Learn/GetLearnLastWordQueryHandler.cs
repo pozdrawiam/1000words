@@ -2,17 +2,17 @@
 
 namespace Otw.Core.Application.Learn;
 
-public interface ILastWordQueryHandler
+public interface IGetLearnLastWordQueryHandler
 {
     Task<WordEntity> ExecuteAsync();
 }
 
-public sealed class LastWordQueryHandler : ILastWordQueryHandler
+public sealed class GetLearnLastWordQueryHandler : IGetLearnLastWordQueryHandler
 {
     private readonly IParametersRepository _parameters;
     private readonly IWordsRepository _repo;
 
-    public LastWordQueryHandler(IParametersRepository parameters, IWordsRepository repo)
+    public GetLearnLastWordQueryHandler(IParametersRepository parameters, IWordsRepository repo)
     {
         _parameters = parameters;
         _repo = repo;

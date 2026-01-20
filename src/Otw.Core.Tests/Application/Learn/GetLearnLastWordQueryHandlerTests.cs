@@ -1,17 +1,17 @@
 ﻿using Moq;
-using Otw.Core.Application.Review;
+using Otw.Core.Application.Learn;
 using Otw.Core.Domain;
 
-namespace Otw.Core.Tests.Application.Review;
+namespace Otw.Core.Tests.Application.Learn;
 
-public class LastWordQueryHandlerTests
+public class GetLearnLastWordQueryHandlerTests
 {
-    private readonly LastWordQueryHandler _sut;
+    private readonly GetLearnLastWordQueryHandler _sut;
     
     private readonly Mock<IParametersRepository> _parametersMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
 
-    public LastWordQueryHandlerTests()
+    public GetLearnLastWordQueryHandlerTests()
     {
         _sut = new(_parametersMock.Object, _repoMock.Object);
     }
@@ -71,7 +71,7 @@ public class LastWordQueryHandlerTests
         };
 
         _parametersMock
-            .Setup(p => p.GetReviewLastWordIdAsync())
+            .Setup(p => p.GetLearnLastWordIdAsync())
             .ReturnsAsync(5);
 
         _repoMock.Setup(r => r.GetByIdAsync(5))
@@ -96,7 +96,7 @@ public class LastWordQueryHandlerTests
         };
 
         _parametersMock
-            .Setup(p => p.GetReviewLastWordIdAsync())
+            .Setup(p => p.GetLearnLastWordIdAsync())
             .ReturnsAsync((int?)null);
 
         _repoMock.Setup(r => r.GetByIdAsync(1))
