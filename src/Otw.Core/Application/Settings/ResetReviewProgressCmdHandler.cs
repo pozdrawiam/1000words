@@ -1,17 +1,17 @@
 ﻿using Otw.Core.Domain;
 
-namespace Otw.Core.Application.Review;
+namespace Otw.Core.Application.Settings;
 
-public interface IResetProgressCmdHandler
+public interface IResetReviewProgressCmdHandler
 {
     Task ExecuteAsync();
 }
 
-public sealed class ResetProgressCmdHandler : IResetProgressCmdHandler
+public sealed class ResetReviewProgressCmdHandler : IResetReviewProgressCmdHandler
 {
     private readonly ILocalStorageService _localStorage;
 
-    public ResetProgressCmdHandler(ILocalStorageService localStorage)
+    public ResetReviewProgressCmdHandler(ILocalStorageService localStorage)
     {
         _localStorage = localStorage;
     }

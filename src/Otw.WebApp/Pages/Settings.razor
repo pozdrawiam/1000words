@@ -1,10 +1,11 @@
 @page "/settings"
 @using Microsoft.Extensions.Localization
+@using Otw.Core.Application.Settings
 @using Otw.Core.Domain
 
 @inject IStringLocalizer<Resources.Pages.Settings> Loc
-@inject Otw.Core.Application.Learn.IResetProgressCmdHandler LearnResetHandler
-@inject Otw.Core.Application.Review.IResetProgressCmdHandler ReviewResetHandler
+@inject IResetLearnProgressCmdHandler LearnResetHandler
+@inject IResetReviewProgressCmdHandler ReviewResetReviewHandler
 @inject Otw.Core.Application.Settings.ILearnSortTypeQueryHandler LearnSortTypeQueryHandler
 @inject Otw.Core.Application.Settings.ISetLearSortTypeCmdHandler SetLearSortTypeCmdHandler
 @inject Otw.Core.Application.Settings.IReviewSortTypeQueryHandler ReviewSortTypeQueryHandler
@@ -125,7 +126,7 @@
         var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", Loc["ResetReviewConfirm"].Value);
         if (confirmed)
         {
-            await ReviewResetHandler.ExecuteAsync();
+            await ReviewResetReviewHandler.ExecuteAsync();
             Navigation.NavigateTo("/review", forceLoad: true);
         }
     }
