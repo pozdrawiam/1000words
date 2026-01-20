@@ -9,16 +9,15 @@ public interface ISetReviewSortTypeCmdHandler
 
 public class SetReviewSortTypeCmdHandler : ISetReviewSortTypeCmdHandler
 {
-    private const string Key = "Review_WordSortType";
-    private readonly ILocalStorageService _localStorage;
+    private readonly IParametersRepository _parameters;
 
-    public SetReviewSortTypeCmdHandler(ILocalStorageService localStorage)
+    public SetReviewSortTypeCmdHandler(IParametersRepository parameters)
     {
-        _localStorage = localStorage;
+        _parameters = parameters;
     }
 
     public async Task ExecuteAsync(WordSortType sortType)
     {
-        await _localStorage.SetItemAsync(Key, sortType.ToString());
+        await _parameters.SetReviewSortTypeAsync(sortType);
     }
 }

@@ -9,12 +9,12 @@ public interface IPreviousWordCmdHandler
 
 public sealed class PreviousWordCmdHandler : IPreviousWordCmdHandler
 {
-    private readonly ILocalStorageService _localStorage;
+    private readonly IParametersRepository _parameters;
     private readonly IWordsRepository _repo;
 
-    public PreviousWordCmdHandler(ILocalStorageService localStorage, IWordsRepository repo)
+    public PreviousWordCmdHandler(IParametersRepository parameters, IWordsRepository repo)
     {
-        _localStorage = localStorage;
+        _parameters = parameters;
         _repo = repo;
     }
 
@@ -25,13 +25,13 @@ public sealed class PreviousWordCmdHandler : IPreviousWordCmdHandler
 
         if (previousWord is not null)
         {
-            await _localStorage.SetItemAsync("Learn_lastWordId", previousWord.Id.ToString());
+            await _parameters.SetLearnLastWordIdAsync(previousWord.Id);
             
             return previousWord;
         }
         
         var firstWord = (await _repo.GetAllAsync()).First();
-        await _localStorage.SetItemAsync("Learn_lastWordId", firstWord.Id.ToString());
+        await _parameters.SetLearnLastWordIdAsync(firstWord.Id);
         
         return firstWord;
     }

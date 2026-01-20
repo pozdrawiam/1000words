@@ -9,16 +9,15 @@ public interface ISetLearSortTypeCmdHandler
 
 public class SetLearSortTypeCmdHandler : ISetLearSortTypeCmdHandler
 {
-    private const string Key = "Learn_WordSortType";
-    private readonly ILocalStorageService _localStorage;
+    private readonly IParametersRepository _parameters;
 
-    public SetLearSortTypeCmdHandler(ILocalStorageService localStorage)
+    public SetLearSortTypeCmdHandler(IParametersRepository parameters)
     {
-        _localStorage = localStorage;
+        _parameters = parameters;
     }
 
     public async Task ExecuteAsync(WordSortType sortType)
     {
-        await _localStorage.SetItemAsync(Key, sortType.ToString());
+        await _parameters.SetLearnSortTypeAsync(sortType);
     }
 }

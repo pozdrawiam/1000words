@@ -9,22 +9,22 @@ public interface ILastWordQueryHandler
 
 public class LastWordQueryHandler : ILastWordQueryHandler
 {
-    private readonly ILocalStorageService _localStorage;
+    private readonly IParametersRepository _parameters;
     private readonly IWordsRepository _repo;
 
-    public LastWordQueryHandler(ILocalStorageService localStorage, IWordsRepository repo)
+    public LastWordQueryHandler(IParametersRepository parameters, IWordsRepository repo)
     {
-        _localStorage = localStorage;
+        _parameters = parameters;
         _repo = repo;
     }
     
     public async Task<WordEntity> ExecuteAsync()
     {
         int lastWordId = 1;
-        var storedId = await _localStorage.GetItemAsync("Review_lastWordId");
+        var storedId = await _parameters.GetReviewLastWordIdAsync();
         
-        if (!string.IsNullOrEmpty(storedId) && int.TryParse(storedId, out var parsedId))
-            lastWordId = parsedId;
+        if (storedId.HasValue)
+            lastWordId = storedId.Value;
 
         var lastWord = await _repo.GetByIdAsync(lastWordId);
 

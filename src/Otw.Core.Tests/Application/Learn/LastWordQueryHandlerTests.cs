@@ -8,12 +8,12 @@ public class LastWordQueryHandlerTests
 {
     private readonly LastWordQueryHandler _sut;
     
-    private readonly Mock<ILocalStorageService> _localStorageMock = new();
+    private readonly Mock<IParametersRepository> _parametersMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
 
     public LastWordQueryHandlerTests()
     {
-        _sut = new(_localStorageMock.Object, _repoMock.Object);
+        _sut = new(_parametersMock.Object, _repoMock.Object);
     }
 
     [Fact]
@@ -70,9 +70,9 @@ public class LastWordQueryHandlerTests
             Translation = ""
         };
 
-        _localStorageMock
-            .Setup(ls => ls.GetItemAsync("Learn_lastWordId"))
-            .ReturnsAsync("5");
+        _parametersMock
+            .Setup(p => p.GetLearnLastWordIdAsync())
+            .ReturnsAsync(5);
 
         _repoMock.Setup(r => r.GetByIdAsync(5))
             .ReturnsAsync(expectedWord);
@@ -86,7 +86,7 @@ public class LastWordQueryHandlerTests
     }
 
     [Fact]
-    public async Task ExecuteAsync_ShouldFallbackTo1_WhenLocalStorageValueIsNotParsable()
+    public async Task ExecuteAsync_ShouldFallbackTo1_WhenLocalStorageValueIsNull()
     {
         var expectedWord = new WordEntity
         {
@@ -95,9 +95,9 @@ public class LastWordQueryHandlerTests
             Translation = ""
         };
 
-        _localStorageMock
-            .Setup(ls => ls.GetItemAsync("Learn_lastWordId"))
-            .ReturnsAsync("not-an-int");
+        _parametersMock
+            .Setup(p => p.GetLearnLastWordIdAsync())
+            .ReturnsAsync((int?)null);
 
         _repoMock.Setup(r => r.GetByIdAsync(1))
             .ReturnsAsync(expectedWord);

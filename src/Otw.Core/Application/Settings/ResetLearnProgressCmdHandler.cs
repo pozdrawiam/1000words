@@ -9,15 +9,15 @@ public interface IResetLearnProgressCmdHandler
 
 public sealed class ResetLearnProgressCmdHandler : IResetLearnProgressCmdHandler
 {
-    private readonly ILocalStorageService _localStorage;
+    private readonly IParametersRepository _parameters;
 
-    public ResetLearnProgressCmdHandler(ILocalStorageService localStorage)
+    public ResetLearnProgressCmdHandler(IParametersRepository parameters)
     {
-        _localStorage = localStorage;
+        _parameters = parameters;
     }
 
     public async Task ExecuteAsync()
     {
-        await _localStorage.RemoveItemAsync("Learn_lastWordId");
+        await _parameters.ResetLearnProgressAsync();
     }
 }

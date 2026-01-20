@@ -9,22 +9,15 @@ public interface IReviewSortTypeQueryHandler
 
 public class ReviewSortTypeQueryHandler : IReviewSortTypeQueryHandler
 {
-    private const string Key = "Review_WordSortType";
-    private readonly ILocalStorageService _localStorage;
+    private readonly IParametersRepository _parameters;
 
-    public ReviewSortTypeQueryHandler(ILocalStorageService localStorage)
+    public ReviewSortTypeQueryHandler(IParametersRepository parameters)
     {
-        _localStorage = localStorage;
+        _parameters = parameters;
     }
 
     public async Task<WordSortType> ExecuteAsync()
     {
-        var value = await _localStorage.GetItemAsync(Key);
-        if (string.IsNullOrEmpty(value) || !Enum.TryParse<WordSortType>(value, out var result))
-        {
-            return WordSortType.Default;
-        }
-
-        return result;
+        return await _parameters.GetReviewSortTypeAsync();
     }
 }

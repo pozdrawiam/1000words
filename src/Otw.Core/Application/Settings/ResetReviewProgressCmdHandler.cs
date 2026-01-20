@@ -9,15 +9,15 @@ public interface IResetReviewProgressCmdHandler
 
 public sealed class ResetReviewProgressCmdHandler : IResetReviewProgressCmdHandler
 {
-    private readonly ILocalStorageService _localStorage;
+    private readonly IParametersRepository _parameters;
 
-    public ResetReviewProgressCmdHandler(ILocalStorageService localStorage)
+    public ResetReviewProgressCmdHandler(IParametersRepository parameters)
     {
-        _localStorage = localStorage;
+        _parameters = parameters;
     }
 
     public async Task ExecuteAsync()
     {
-        await _localStorage.RemoveItemAsync("Review_lastWordId");
+        await _parameters.ResetReviewProgressAsync();
     }
 }

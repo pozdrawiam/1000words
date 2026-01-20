@@ -8,12 +8,12 @@ public class NextWordCmdHandlerTests
 {
     private readonly NextWordCmdHandler _sut;
 
-    private readonly Mock<ILocalStorageService> _localStorageMock = new();
+    private readonly Mock<IParametersRepository> _parametersMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
     
     public NextWordCmdHandlerTests()
     {
-        _sut = new(_localStorageMock.Object, _repoMock.Object);
+        _sut = new(_parametersMock.Object, _repoMock.Object);
     }
 
     [Fact]
@@ -37,8 +37,8 @@ public class NextWordCmdHandlerTests
         _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
 
-        _localStorageMock.Verify(ls => 
-            ls.SetItemAsync("Learn_lastWordId", expectedNextWord.Id.ToString()), 
+        _parametersMock.Verify(p => 
+            p.SetLearnLastWordIdAsync(expectedNextWord.Id), 
             Times.Once);
     }
 
@@ -66,8 +66,8 @@ public class NextWordCmdHandlerTests
         _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
 
-        _localStorageMock.Verify(ls => 
-            ls.SetItemAsync("Learn_lastWordId", words.First().Id.ToString()), 
+        _parametersMock.Verify(p => 
+            p.SetLearnLastWordIdAsync(words.First().Id), 
             Times.Once);
     }
 
@@ -87,8 +87,8 @@ public class NextWordCmdHandlerTests
             _sut.ExecuteAsync(currentWordId)
         );
         
-        _localStorageMock.Verify(ls => 
-            ls.SetItemAsync(It.IsAny<string>(), It.IsAny<string>()), 
+        _parametersMock.Verify(p => 
+            p.SetLearnLastWordIdAsync(It.IsAny<int>()), 
             Times.Never);
     }
 }
