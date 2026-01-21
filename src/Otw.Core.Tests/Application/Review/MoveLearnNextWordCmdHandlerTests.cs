@@ -4,14 +4,14 @@ using Otw.Core.Domain;
 
 namespace Otw.Core.Tests.Application.Review;
 
-public class NextWordCmdHandlerTests
+public class MoveReviewNextWordCmdHandlerTests
 {
-    private readonly NextWordCmdHandler _sut;
+    private readonly MoveReviewNextWordCmdHandler _sut;
 
     private readonly Mock<IParametersRepository> _parametersMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
     
-    public NextWordCmdHandlerTests()
+    public MoveReviewNextWordCmdHandlerTests()
     {
         _sut = new(_parametersMock.Object, _repoMock.Object);
     }

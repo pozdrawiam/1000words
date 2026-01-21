@@ -2,17 +2,17 @@
 
 namespace Otw.Core.Application.Review;
 
-public interface INextWordCmdHandler
+public interface IMoveReviewNextWordCmdHandler
 {
     Task<WordEntity> ExecuteAsync(int currentWordId);
 }
 
-public class NextWordCmdHandler : INextWordCmdHandler
+public class MoveReviewNextWordCmdHandler : IMoveReviewNextWordCmdHandler
 {
     private readonly IParametersRepository _parameters;
     private readonly IWordsRepository _repo;
 
-    public NextWordCmdHandler(IParametersRepository parameters, IWordsRepository repo)
+    public MoveReviewNextWordCmdHandler(IParametersRepository parameters, IWordsRepository repo)
     {
         _parameters = parameters;
         _repo = repo;

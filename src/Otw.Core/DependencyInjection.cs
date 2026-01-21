@@ -14,7 +14,7 @@ public static class DependencyInjection
         services.AddScoped<Application.Learn.IPreviousWordCmdHandler, Application.Learn.PreviousWordCmdHandler>();
         
         services.AddScoped<Application.Review.IGetReviewLastWordQueryHandler, Application.Review.GetReviewLastWordQueryHandler>();
-        services.AddScoped<Application.Review.INextWordCmdHandler, Application.Review.NextWordCmdHandler>();
+        services.AddScoped<Application.Review.IMoveReviewNextWordCmdHandler, Application.Review.MoveReviewNextWordCmdHandler>();
         services.AddScoped<Application.Review.IPreviousWordCmdHandler, Application.Review.PreviousWordCmdHandler>();
         
         services.AddScoped<ILearnSortTypeQueryHandler, LearnSortTypeQueryHandler>();
