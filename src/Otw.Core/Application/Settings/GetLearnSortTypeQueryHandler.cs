@@ -2,16 +2,16 @@
 
 namespace Otw.Core.Application.Settings;
 
-public interface ILearnSortTypeQueryHandler
+public interface IGetLearnSortTypeQueryHandler
 {
     Task<WordSortType> ExecuteAsync();
 }
 
-public class LearnSortTypeQueryHandler : ILearnSortTypeQueryHandler
+public class GetLearnSortTypeQueryHandler : IGetLearnSortTypeQueryHandler
 {
     private readonly IParametersRepository _parameters;
 
-    public LearnSortTypeQueryHandler(IParametersRepository parameters)
+    public GetLearnSortTypeQueryHandler(IParametersRepository parameters)
     {
         _parameters = parameters;
     }

@@ -7,9 +7,9 @@
 
 @inject IResetLearnProgressCmdHandler LearnResetHandler
 @inject IResetReviewProgressCmdHandler ReviewResetReviewHandler
-@inject ILearnSortTypeQueryHandler LearnSortTypeQueryHandler
+@inject IGetLearnSortTypeQueryHandler LearnSortHandler
 @inject ISetLearSortTypeCmdHandler SetLearSortTypeCmdHandler
-@inject IReviewSortTypeQueryHandler ReviewSortTypeQueryHandler
+@inject IGetReviewSortTypeQueryHandler ReviewSortHandler
 @inject ISetReviewSortTypeCmdHandler SetReviewSortTypeCmdHandler
 
 @inject NavigationManager Navigation
@@ -91,8 +91,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _learnSortType = await LearnSortTypeQueryHandler.ExecuteAsync();
-        _reviewSortType = await ReviewSortTypeQueryHandler.ExecuteAsync();
+        _learnSortType = await LearnSortHandler.ExecuteAsync();
+        _reviewSortType = await ReviewSortHandler.ExecuteAsync();
     }
 
     private async Task OnLearnSortTypeChanged(ChangeEventArgs e)
