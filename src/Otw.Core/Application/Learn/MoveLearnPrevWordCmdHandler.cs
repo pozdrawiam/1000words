@@ -2,17 +2,17 @@
 
 namespace Otw.Core.Application.Learn;
 
-public interface INextWordCmdHandler
+public interface IMoveLearnPrevWordCmdHandler
 {
     Task<WordEntity> ExecuteAsync(int currentWordId);
 }
 
-public sealed class NextWordCmdHandler : INextWordCmdHandler
+public sealed class MoveLearnPrevWordCmdHandler : IMoveLearnPrevWordCmdHandler
 {
     private readonly IParametersRepository _parameters;
     private readonly IWordsRepository _repo;
 
-    public NextWordCmdHandler(IParametersRepository parameters, IWordsRepository repo)
+    public MoveLearnPrevWordCmdHandler(IParametersRepository parameters, IWordsRepository repo)
     {
         _parameters = parameters;
         _repo = repo;
@@ -20,14 +20,14 @@ public sealed class NextWordCmdHandler : INextWordCmdHandler
 
     public async Task<WordEntity> ExecuteAsync(int currentWordId)
     {
-        var nextWordId = currentWordId + 1;
-        var nextWord = await _repo.GetByIdAsync(nextWordId);
+        var previousWordId = currentWordId - 1;
+        var previousWord = await _repo.GetByIdAsync(previousWordId);
 
-        if (nextWord is not null)
+        if (previousWord is not null)
         {
-            await _parameters.SetLearnLastWordIdAsync(nextWord.Id);
+            await _parameters.SetLearnLastWordIdAsync(previousWord.Id);
             
-            return nextWord;
+            return previousWord;
         }
         
         var firstWord = (await _repo.GetAllAsync()).First();

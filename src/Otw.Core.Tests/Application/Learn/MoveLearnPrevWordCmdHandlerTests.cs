@@ -1,17 +1,17 @@
 ﻿using Moq;
-using Otw.Core.Application.Review;
+using Otw.Core.Application.Learn;
 using Otw.Core.Domain;
 
-namespace Otw.Core.Tests.Application.Review;
+namespace Otw.Core.Tests.Application.Learn;
 
-public class PreviousWordCmdHandlerTests
+public class MoveLearnPrevWordCmdHandlerTests
 {
-    private readonly PreviousWordCmdHandler _sut;
+    private readonly MoveLearnPrevWordCmdHandler _sut;
 
     private readonly Mock<IParametersRepository> _parametersMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
     
-    public PreviousWordCmdHandlerTests()
+    public MoveLearnPrevWordCmdHandlerTests()
     {
         _sut = new(_parametersMock.Object, _repoMock.Object);
     }
@@ -38,7 +38,7 @@ public class PreviousWordCmdHandlerTests
         _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
 
         _parametersMock.Verify(p => 
-            p.SetReviewLastWordIdAsync(expectedPreviousWord.Id), 
+            p.SetLearnLastWordIdAsync(expectedPreviousWord.Id), 
             Times.Once);
     }
 
@@ -67,7 +67,7 @@ public class PreviousWordCmdHandlerTests
         _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
 
         _parametersMock.Verify(p => 
-            p.SetReviewLastWordIdAsync(words.First().Id), 
+            p.SetLearnLastWordIdAsync(words.First().Id), 
             Times.Once);
     }
 
@@ -88,7 +88,7 @@ public class PreviousWordCmdHandlerTests
         );
         
         _parametersMock.Verify(p => 
-            p.SetReviewLastWordIdAsync(It.IsAny<int>()), 
+            p.SetLearnLastWordIdAsync(It.IsAny<int>()), 
             Times.Never);
     }
 }

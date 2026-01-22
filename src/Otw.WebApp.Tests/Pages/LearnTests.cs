@@ -12,8 +12,8 @@ public class LearnTests : TestContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.Learn>> _localizer = new();
     private readonly Mock<IGetLearnLastWordQueryHandler> _lastWordQueryHandler = new();
-    private readonly Mock<INextWordCmdHandler> _nextWordCmdHandler = new();
-    private readonly Mock<IPreviousWordCmdHandler> _previousWordCmdHandler = new();
+    private readonly Mock<IMoveLearnNextWordCmdHandler> _nextWordCmdHandler = new();
+    private readonly Mock<IMoveLearnPrevWordCmdHandler> _previousWordCmdHandler = new();
     
     public LearnTests()
     {

@@ -10,12 +10,12 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<Application.Learn.IGetLearnLastWordQueryHandler, Application.Learn.GetLearnLastWordQueryHandler>();
-        services.AddScoped<Application.Learn.INextWordCmdHandler, Application.Learn.NextWordCmdHandler>();
-        services.AddScoped<Application.Learn.IPreviousWordCmdHandler, Application.Learn.PreviousWordCmdHandler>();
+        services.AddScoped<Application.Learn.IMoveLearnNextWordCmdHandler, Application.Learn.MoveLearnNextWordCmdHandler>();
+        services.AddScoped<Application.Learn.IMoveLearnPrevWordCmdHandler, Application.Learn.MoveLearnPrevWordCmdHandler>();
         
         services.AddScoped<Application.Review.IGetReviewLastWordQueryHandler, Application.Review.GetReviewLastWordQueryHandler>();
         services.AddScoped<Application.Review.IMoveReviewNextWordCmdHandler, Application.Review.MoveReviewNextWordCmdHandler>();
-        services.AddScoped<Application.Review.IPreviousWordCmdHandler, Application.Review.PreviousWordCmdHandler>();
+        services.AddScoped<Application.Review.IMoveReviewPrevWordCmdHandler, Application.Review.MoveReviewPrevWordCmdHandler>();
         
         services.AddScoped<ILearnSortTypeQueryHandler, LearnSortTypeQueryHandler>();
         services.AddScoped<ISetLearSortTypeCmdHandler, SetLearSortTypeCmdHandler>();

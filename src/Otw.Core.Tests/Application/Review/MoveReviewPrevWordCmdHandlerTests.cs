@@ -1,53 +1,53 @@
 ﻿using Moq;
-using Otw.Core.Application.Learn;
+using Otw.Core.Application.Review;
 using Otw.Core.Domain;
 
-namespace Otw.Core.Tests.Application.Learn;
+namespace Otw.Core.Tests.Application.Review;
 
-public class NextWordCmdHandlerTests
+public class MoveReviewPrevWordCmdHandlerTests
 {
-    private readonly NextWordCmdHandler _sut;
+    private readonly MoveReviewPrevWordCmdHandler _sut;
 
     private readonly Mock<IParametersRepository> _parametersMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
     
-    public NextWordCmdHandlerTests()
+    public MoveReviewPrevWordCmdHandlerTests()
     {
         _sut = new(_parametersMock.Object, _repoMock.Object);
     }
 
     [Fact]
-    public async Task ExecuteAsync_ShouldReturnNextWord_WhenItExists()
+    public async Task ExecuteAsync_ShouldReturnPreviousWord_WhenItExists()
     {
         const int currentWordId = 5;
-        var expectedNextWord = new WordEntity
+        var expectedPreviousWord = new WordEntity
         {
-            Id = currentWordId + 1,
-            Value = "NextWord",
+            Id = currentWordId - 1,
+            Value = "PreviousWord",
             Translation = ""
         };
 
-        _repoMock.Setup(r => r.GetByIdAsync(currentWordId + 1))
-            .ReturnsAsync(expectedNextWord);
+        _repoMock.Setup(r => r.GetByIdAsync(currentWordId - 1))
+            .ReturnsAsync(expectedPreviousWord);
 
         // Act
         var result = await _sut.ExecuteAsync(currentWordId);
         
-        Assert.Equal(expectedNextWord, result);
-        _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
+        Assert.Equal(expectedPreviousWord, result);
+        _repoMock.Verify(r => r.GetByIdAsync(currentWordId - 1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
 
         _parametersMock.Verify(p => 
-            p.SetLearnLastWordIdAsync(expectedNextWord.Id), 
+            p.SetReviewLastWordIdAsync(expectedPreviousWord.Id), 
             Times.Once);
     }
 
     [Fact]
-    public async Task ExecuteAsync_ShouldReturnFirstWord_WhenNextWordDoesNotExist()
+    public async Task ExecuteAsync_ShouldReturnFirstWord_WhenPreviousWordDoesNotExist()
     {
         const int currentWordId = 10;
 
-        _repoMock.Setup(r => r.GetByIdAsync(currentWordId + 1))
+        _repoMock.Setup(r => r.GetByIdAsync(currentWordId - 1))
             .ReturnsAsync((WordEntity?)null);
 
         var words = new WordEntity[]
@@ -63,11 +63,11 @@ public class NextWordCmdHandlerTests
         var result = await _sut.ExecuteAsync(currentWordId);
         
         Assert.Equal(words.First(), result);
-        _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
+        _repoMock.Verify(r => r.GetByIdAsync(currentWordId - 1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
 
         _parametersMock.Verify(p => 
-            p.SetLearnLastWordIdAsync(words.First().Id), 
+            p.SetReviewLastWordIdAsync(words.First().Id), 
             Times.Once);
     }
 
@@ -76,7 +76,7 @@ public class NextWordCmdHandlerTests
     {
         const int currentWordId = 3;
 
-        _repoMock.Setup(r => r.GetByIdAsync(currentWordId + 1))
+        _repoMock.Setup(r => r.GetByIdAsync(currentWordId - 1))
             .ReturnsAsync((WordEntity?)null);
 
         _repoMock.Setup(r => r.GetAllAsync())
@@ -88,7 +88,7 @@ public class NextWordCmdHandlerTests
         );
         
         _parametersMock.Verify(p => 
-            p.SetLearnLastWordIdAsync(It.IsAny<int>()), 
+            p.SetReviewLastWordIdAsync(It.IsAny<int>()), 
             Times.Never);
     }
 }
