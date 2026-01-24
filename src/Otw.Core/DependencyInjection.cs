@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Otw.Core.Application.Learn;
+using Otw.Core.Application.Review;
 using Otw.Core.Application.Settings;
 using Otw.Core.Domain;
 using Otw.Core.Infrastructure;
@@ -9,13 +11,13 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<Application.Learn.IGetLearnLastWordQueryHandler, Application.Learn.GetLearnLastWordQueryHandler>();
-        services.AddScoped<Application.Learn.IMoveLearnNextWordCmdHandler, Application.Learn.MoveLearnNextWordCmdHandler>();
-        services.AddScoped<Application.Learn.IMoveLearnPrevWordCmdHandler, Application.Learn.MoveLearnPrevWordCmdHandler>();
+        services.AddScoped<IGetLearnLastWordQueryHandler, GetLearnLastWordQueryHandler>();
+        services.AddScoped<IMoveLearnNextWordCmdHandler, MoveLearnNextWordCmdHandler>();
+        services.AddScoped<IMoveLearnPrevWordCmdHandler, MoveLearnPrevWordCmdHandler>();
         
-        services.AddScoped<Application.Review.IGetReviewLastWordQueryHandler, Application.Review.GetReviewLastWordQueryHandler>();
-        services.AddScoped<Application.Review.IMoveReviewNextWordCmdHandler, Application.Review.MoveReviewNextWordCmdHandler>();
-        services.AddScoped<Application.Review.IMoveReviewPrevWordCmdHandler, Application.Review.MoveReviewPrevWordCmdHandler>();
+        services.AddScoped<IGetReviewLastWordQueryHandler, GetReviewLastWordQueryHandler>();
+        services.AddScoped<IMoveReviewNextWordCmdHandler, MoveReviewNextWordCmdHandler>();
+        services.AddScoped<IMoveReviewPrevWordCmdHandler, MoveReviewPrevWordCmdHandler>();
         
         services.AddScoped<IGetLearnSortTypeQueryHandler, GetLearnSortTypeQueryHandler>();
         services.AddScoped<ISetLearSortTypeCmdHandler, SetLearSortTypeCmdHandler>();
