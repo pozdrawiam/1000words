@@ -30,7 +30,7 @@ public sealed class WordsRepository : IWordsRepository
             await EnsureCacheLoadedAsync();
         }
 
-        return _cache!.TryGetValue(id, out var word) ? word : null;
+        return _cache!.GetValueOrDefault(id);
     }
     
     private async Task EnsureCacheLoadedAsync()
@@ -42,11 +42,9 @@ public sealed class WordsRepository : IWordsRepository
         using var reader = new StreamReader(stream);
 
         var words = new Dictionary<int, WordEntity>(DomainConsts.TotalWords);
-        
-        int currentIndex = 0;
-        string? line;
-        
-        while ((line = await reader.ReadLineAsync()) != null)
+        var currentIndex = 0;
+
+        while (await reader.ReadLineAsync() is { } line)
         {
             if (string.IsNullOrWhiteSpace(line)) 
                 continue;
@@ -55,22 +53,20 @@ public sealed class WordsRepository : IWordsRepository
             if (separatorIndex == -1) 
                 continue;
             
-            var value = line.Substring(0, separatorIndex).Trim();
+            var value = line[..separatorIndex].Trim();
             if (separatorIndex + 1 >= line.Length) 
                 continue;
 
-            var translation = line.Substring(separatorIndex + 1).Trim();
+            var translation = line[(separatorIndex + 1)..].Trim();
             
             currentIndex++;
             
-            var entity = new WordEntity
+            words[currentIndex] = new WordEntity
             {
                 Id = currentIndex,
                 Value = value,
                 Translation = translation
             };
-            
-            words[currentIndex] = entity;
         }
         
         _cache = words;
