@@ -26,9 +26,7 @@ public sealed class WordsRepository : IWordsRepository
     public async Task<WordEntity?> GetByIdAsync(int id)
     {
         if (_cache is null)
-        {
             await EnsureCacheLoadedAsync();
-        }
 
         return _cache!.GetValueOrDefault(id);
     }
