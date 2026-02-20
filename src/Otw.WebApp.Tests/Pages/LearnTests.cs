@@ -8,7 +8,7 @@ using Otw.Core.Domain;
 
 namespace Otw.WebApp.Tests.Pages;
 
-public class LearnTests : TestContext
+public class LearnTests : BunitContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.Learn>> _localizer = new();
     private readonly Mock<IGetLearnLastWordQueryHandler> _lastWordQueryHandler = new();
@@ -42,7 +42,7 @@ public class LearnTests : TestContext
             });
 
         // Act
-        var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Otw.WebApp.Pages.Learn>();
         
         Assert.Contains("Test loading message", cut.Markup);
     }
@@ -59,7 +59,7 @@ public class LearnTests : TestContext
             });
         
         // Act
-        var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Otw.WebApp.Pages.Learn>();
         
         Assert.Contains("Test1", cut.Markup);
         Assert.Contains("Test1Translation", cut.Markup);
@@ -89,7 +89,7 @@ public class LearnTests : TestContext
             .Setup(x => x.ExecuteAsync(firstWord.Id))
             .ReturnsAsync(nextWord);
 
-        var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Otw.WebApp.Pages.Learn>();
         var button = cut.Find("button.btn-primary");
         
         // Act

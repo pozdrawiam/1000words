@@ -9,7 +9,7 @@ using Otw.WebApp.Pages;
 
 namespace Otw.WebApp.Tests.Pages;
 
-public class SettingsTests : TestContext
+public class SettingsTests : BunitContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.Settings>> _localizer = new();
     private readonly Mock<IResetLearnProgressCmdHandler> _learnResetHandler = new();
@@ -44,7 +44,7 @@ public class SettingsTests : TestContext
         _learnSortHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(WordSortType.Default);
         _reviewSortHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(WordSortType.Default);
         
-        var cut = RenderComponent<Settings>();
+        var cut = Render<Settings>();
 
         // Act
         var selects = cut.FindAll("select");
@@ -61,7 +61,7 @@ public class SettingsTests : TestContext
         _learnSortHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(WordSortType.Default);
         _reviewSortHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(WordSortType.Default);
         
-        var cut = RenderComponent<Settings>();
+        var cut = Render<Settings>();
 
         // Act
         var selects = cut.FindAll("select");

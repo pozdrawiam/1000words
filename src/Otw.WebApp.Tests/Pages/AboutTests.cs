@@ -8,7 +8,7 @@ using Otw.WebApp.Pages;
 
 namespace Otw.WebApp.Tests.Pages;
 
-public class AboutTests : TestContext
+public class AboutTests : BunitContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.About>> _localizer = new();
     private readonly Mock<IParametersRepository> _parametersRepository = new();
@@ -26,7 +26,7 @@ public class AboutTests : TestContext
     public void Should_RenderContent()
     {
         // Act
-        var cut = RenderComponent<About>();
+        var cut = Render<About>();
 
         // Assert
         Assert.Contains("Title", cut.Markup);
@@ -39,7 +39,7 @@ public class AboutTests : TestContext
         // Arrange
         var nav = Services.GetRequiredService<NavigationManager>();
 
-        var cut = RenderComponent<About>();
+        var cut = Render<About>();
         
         // Act
         cut.Find("button.btn-primary").Click();

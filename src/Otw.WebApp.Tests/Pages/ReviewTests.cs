@@ -9,7 +9,7 @@ using Otw.WebApp.Pages;
 
 namespace Otw.WebApp.Tests.Pages;
 
-public class ReviewTests : TestContext
+public class ReviewTests : BunitContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.Review>> _localizer = new();
     private readonly Mock<IGetReviewLastWordQueryHandler> _lastWordHandler = new();
@@ -39,7 +39,7 @@ public class ReviewTests : TestContext
             });
 
         // Act
-        var cut = RenderComponent<Review>();
+        var cut = Render<Review>();
 
         // Assert
         Assert.Contains("Loading", cut.Markup); 
@@ -53,7 +53,7 @@ public class ReviewTests : TestContext
         _lastWordHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(word);
 
         // Act
-        var cut = RenderComponent<Review>();
+        var cut = Render<Review>();
 
         // Assert
         Assert.Contains("Cat", cut.Markup);
@@ -69,7 +69,7 @@ public class ReviewTests : TestContext
         var word = new WordEntity { Id = 1, Value = "Cat", Translation = "Kot" };
         _lastWordHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(word);
 
-        var cut = RenderComponent<Review>();
+        var cut = Render<Review>();
 
         // Act
         cut.Find("button.btn-success").Click();
@@ -89,7 +89,7 @@ public class ReviewTests : TestContext
         _lastWordHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(word1);
         _nextWordHandler.Setup(x => x.ExecuteAsync(word1.Id)).ReturnsAsync(word2);
 
-        var cut = RenderComponent<Review>();
+        var cut = Render<Review>();
         
         // Act
         await cut.FindAll("button.btn-primary").First(b => b.TextContent.Contains("NextWord")).ClickAsync(new MouseEventArgs());
@@ -108,7 +108,7 @@ public class ReviewTests : TestContext
         _lastWordHandler.Setup(x => x.ExecuteAsync()).ReturnsAsync(word2);
         _prevWordHandler.Setup(x => x.ExecuteAsync(word2.Id)).ReturnsAsync(word1);
 
-        var cut = RenderComponent<Review>();
+        var cut = Render<Review>();
         
         // Act
         await cut.FindAll("button.btn-secondary")

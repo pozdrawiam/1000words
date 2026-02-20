@@ -7,7 +7,7 @@ using Otw.WebApp.Pages;
 
 namespace Otw.WebApp.Tests.Pages;
 
-public class HomeTests : TestContext
+public class HomeTests : BunitContext
 {
     private readonly Mock<IParametersRepository> _parametersRepository = new();
 
@@ -24,7 +24,7 @@ public class HomeTests : TestContext
         var nav = Services.GetRequiredService<NavigationManager>();
 
         // Act
-        RenderComponent<Home>();
+        Render<Home>();
 
         // Assert
         Assert.Equal("http://localhost/learn", nav.Uri);
@@ -38,7 +38,7 @@ public class HomeTests : TestContext
         var nav = Services.GetRequiredService<NavigationManager>();
 
         // Act
-        RenderComponent<Home>();
+        Render<Home>();
 
         // Assert
         Assert.Equal("http://localhost/about", nav.Uri);
