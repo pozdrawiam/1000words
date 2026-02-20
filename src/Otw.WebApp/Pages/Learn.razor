@@ -1,11 +1,13 @@
 ﻿@page "/learn"
 @using Microsoft.Extensions.Localization
 @using Otw.Core.Application.Learn
+@using Otw.Core.Application.Settings
 @using Otw.Core.Domain
 
 @inject IStringLocalizer<Resources.Pages.Learn> Loc
 
 @inject IGetLearnLastWordQueryHandler LastWordHandler
+@inject IGetLearnSortTypeQueryHandler SortTypeHandler
 @inject IMoveLearnNextWordCmdHandler NextWordHandler
 @inject IMoveLearnPrevWordCmdHandler PreviousWordHandler
 
@@ -16,11 +18,14 @@
             
             @if (_currentWord is not null)
             {
-                <div class="progress mb-4" role="progressbar" aria-label="@Loc["Progress"]" 
-                     aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: @ProgressPercent%">@ProgressPercent%</div>
-                </div>
-                
+                if (_sortType != WordSortType.Random)
+                {
+                    <div class="progress mb-4" role="progressbar" aria-label="@Loc["Progress"]"
+                         aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: @ProgressPercent%">@ProgressPercent%</div>
+                    </div>
+                }
+
                 <div class="card shadow-sm text-center">
                     <div class="card-body">
                         <h5 class="card-title display-2 text-primary">@_currentWord.Value</h5>
@@ -54,11 +59,15 @@
 
 @code {
     private WordEntity? _currentWord;
-    
+    private WordSortType? _sortType;
+
     private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / DomainConsts.TotalWords * 100);
 
-    protected override async Task OnInitializedAsync() => 
+    protected override async Task OnInitializedAsync()
+    {
         _currentWord = await LastWordHandler.ExecuteAsync();
+        _sortType = await SortTypeHandler.ExecuteAsync();
+    }
 
     private async Task LoadNextWord()
     {
