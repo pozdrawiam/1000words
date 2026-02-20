@@ -5,6 +5,7 @@ using Microsoft.Extensions.Localization;
 using Moq;
 using Otw.Core.Application.Learn;
 using Otw.Core.Domain;
+using Otw.WebApp.Pages;
 
 namespace Otw.WebApp.Tests.Pages;
 
@@ -42,7 +43,7 @@ public class LearnTests : BunitContext
             });
 
         // Act
-        var cut = Render<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Learn>();
         
         Assert.Contains("Test loading message", cut.Markup);
     }
@@ -59,7 +60,7 @@ public class LearnTests : BunitContext
             });
         
         // Act
-        var cut = Render<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Learn>();
         
         Assert.Contains("Test1", cut.Markup);
         Assert.Contains("Test1Translation", cut.Markup);
@@ -89,7 +90,7 @@ public class LearnTests : BunitContext
             .Setup(x => x.ExecuteAsync(firstWord.Id))
             .ReturnsAsync(nextWord);
 
-        var cut = Render<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Learn>();
         var button = cut.Find("button.btn-primary");
         
         // Act
