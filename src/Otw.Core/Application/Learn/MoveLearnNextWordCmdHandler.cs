@@ -20,19 +20,38 @@ public sealed class MoveLearnNextWordCmdHandler : IMoveLearnNextWordCmdHandler
 
     public async Task<WordEntity> ExecuteAsync(int currentWordId)
     {
-        var nextWordId = currentWordId + 1;
-        var nextWord = await _repo.GetByIdAsync(nextWordId);
-
-        if (nextWord is not null)
-        {
-            await _parameters.SetLearnLastWordIdAsync(nextWord.Id);
+        var sortType = await _parameters.GetLearnSortTypeAsync();
+        var nextWord = await GetNextWordAsync(currentWordId, sortType);
+        
+        await _parameters.SetLearnLastWordIdAsync(nextWord.Id);
             
-            return nextWord;
-        }
+        return nextWord;
+    }
+    
+    private async Task<WordEntity> GetNextWordAsync(int currentWordId, WordSortType sortType)
+    {
+        var words = (await GetWordsSortedAsync(sortType)).ToList();
+        var currentWordIndex = words.FindIndex(w => w.Id == currentWordId);
+
+        if (currentWordIndex == -1)
+            return words.First();
         
-        var firstWord = (await _repo.GetAllAsync()).First();
-        await _parameters.SetLearnLastWordIdAsync(firstWord.Id);
+        var nextWordIndex = (currentWordIndex + 1) % words.Count;
         
-        return firstWord;
+        return nextWordIndex >= words.Count ? words.First() : words[nextWordIndex];
+    }
+    
+    private async Task<IEnumerable<WordEntity>> GetWordsSortedAsync(WordSortType sortType)
+    {
+        var words = await _repo.GetAllAsync();
+
+        return sortType switch
+        {
+            WordSortType.Default => words,
+            WordSortType.AlphabeticalAsc => words.OrderBy(w => w.Value),
+            WordSortType.AlphabeticalDesc => words.OrderByDescending(w => w.Value),
+            WordSortType.Random => words,
+            _ => throw new ArgumentOutOfRangeException(nameof(sortType), sortType, null)
+        };
     }
 }
