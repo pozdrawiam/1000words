@@ -50,7 +50,7 @@ public sealed class MoveLearnNextWordCmdHandler : IMoveLearnNextWordCmdHandler
             WordSortType.Default => words,
             WordSortType.AlphabeticalAsc => words.OrderBy(w => w.Value),
             WordSortType.AlphabeticalDesc => words.OrderByDescending(w => w.Value),
-            WordSortType.Random => words,
+            WordSortType.Random => words.OrderBy(_ => Random.Shared.Next()),
             _ => throw new ArgumentOutOfRangeException(nameof(sortType), sortType, null)
         };
     }
