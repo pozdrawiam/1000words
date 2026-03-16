@@ -30,7 +30,7 @@ public sealed class MoveLearnNextWordCmdHandler : IMoveLearnNextWordCmdHandler
     
     private async Task<WordEntity> GetNextWordAsync(int currentWordId, WordSortType sortType)
     {
-        var words = (await GetWordsSortedAsync(sortType)).ToList();
+        var words = (await WordsHelper.GetWordsSortedAsync(_repo, sortType)).ToList();
         var currentWordIndex = words.FindIndex(w => w.Id == currentWordId);
 
         if (currentWordIndex == -1)
@@ -39,19 +39,5 @@ public sealed class MoveLearnNextWordCmdHandler : IMoveLearnNextWordCmdHandler
         var nextWordIndex = (currentWordIndex + 1) % words.Count;
         
         return nextWordIndex >= words.Count ? words.First() : words[nextWordIndex];
-    }
-    
-    private async Task<IEnumerable<WordEntity>> GetWordsSortedAsync(WordSortType sortType)
-    {
-        var words = await _repo.GetAllAsync();
-
-        return sortType switch
-        {
-            WordSortType.Default => words,
-            WordSortType.AlphabeticalAsc => words.OrderBy(w => w.Value),
-            WordSortType.AlphabeticalDesc => words.OrderByDescending(w => w.Value),
-            WordSortType.Random => words.OrderBy(_ => Random.Shared.Next()),
-            _ => throw new ArgumentOutOfRangeException(nameof(sortType), sortType, null)
-        };
     }
 }
