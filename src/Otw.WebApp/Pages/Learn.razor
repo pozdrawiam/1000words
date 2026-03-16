@@ -32,11 +32,14 @@
                         <p class="card-text fs-3 mb-4 text-success">@_currentWord.Translation</p>
                         
                         <div class="d-flex justify-content-between gap-2">
-                            <button class="btn btn-secondary flex-grow-1" 
-                                    @onclick="LoadPreviousWord"
-                                    disabled="@(_currentWord.Id <= 1)">
-                                <i class="bi bi-arrow-left"></i> @Loc["PreviousWord"]
-                            </button>
+                            @if (_sortType != WordSortType.Random)
+                            {
+                                <button class="btn btn-secondary flex-grow-1"
+                                        @onclick="LoadPreviousWord"
+                                        disabled="@(_currentWord.Id <= 1)">
+                                    <i class="bi bi-arrow-left"></i> @Loc["PreviousWord"]
+                                </button>
+                            }
                             <button class="btn btn-primary flex-grow-1" @onclick="LoadNextWord">
                                 @Loc["NextWord"] <i class="bi bi-arrow-right"></i>
                             </button>
