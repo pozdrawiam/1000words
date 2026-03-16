@@ -12,6 +12,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<IGetLearnLastWordQueryHandler, GetLearnLastWordQueryHandler>();
+        services.AddScoped<IGetLearnProgressQueryHandler, GetLearnProgressQueryHandler>();
         services.AddScoped<IMoveLearnNextWordCmdHandler, MoveLearnNextWordCmdHandler>();
         services.AddScoped<IMoveLearnPrevWordCmdHandler, MoveLearnPrevWordCmdHandler>();
         
