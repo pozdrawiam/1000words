@@ -18,27 +18,23 @@ public sealed class GetLearnLastWordQueryHandler : IGetLearnLastWordQueryHandler
         _repo = repo;
     }
     
-    public async Task<WordEntity> ExecuteAsync() //todo refactor
+    public async Task<WordEntity> ExecuteAsync()
     {
-        int lastWordId = 1;
-        var storedId = await _parameters.GetLearnLastWordIdAsync();
-
-        if (storedId.HasValue)
-            lastWordId = storedId.Value;
-        else
-        {
-            var sortType = await _parameters.GetLearnSortTypeAsync();
-            var words = (await WordsHelper.GetWordsSortedAsync(_repo, sortType)).ToList();
-            
-            lastWordId = words.First().Id;
-        }
-
+        var lastWordId = await ResolveLastWordIdAsync();
         var lastWord = await _repo.GetByIdAsync(lastWordId);
 
-        if (lastWord is not null)
-            return lastWord;
-        
-        var firstWord = (await _repo.GetAllAsync()).First();
-        return firstWord;
+        return lastWord ?? (await _repo.GetAllAsync()).First();
+    }
+
+    private async Task<int> ResolveLastWordIdAsync()
+    {
+        var storedId = await _parameters.GetLearnLastWordIdAsync();
+        if (storedId.HasValue)
+            return storedId.Value;
+
+        var sortType = await _parameters.GetLearnSortTypeAsync();
+        var words = await WordsHelper.GetWordsSortedAsync(_repo, sortType);
+
+        return words.First().Id;
     }
 }
