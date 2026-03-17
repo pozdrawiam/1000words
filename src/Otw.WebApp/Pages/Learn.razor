@@ -37,7 +37,7 @@
                             {
                                 <button class="btn btn-secondary flex-grow-1"
                                         @onclick="LoadPreviousWord"
-                                        disabled="@(_progressPercent.Item1 == 0)">
+                                        disabled="@((decimal)_progressPercent.Item1 == 0.001m)">
                                     <i class="bi bi-arrow-left"></i> @Loc["PreviousWord"]
                                 </button>
                             }
