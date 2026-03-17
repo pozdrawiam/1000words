@@ -14,6 +14,7 @@ public class LearnTests : BunitContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.Learn>> _localizer = new();
     private readonly Mock<IGetLearnLastWordQueryHandler> _lastWordQueryHandler = new();
+    private readonly Mock<IGetLearnProgressQueryHandler> _progressQueryHandler = new();
     private readonly Mock<IGetLearnSortTypeQueryHandler> _sortTypeQueryHandler = new();
     private readonly Mock<IMoveLearnNextWordCmdHandler> _nextWordCmdHandler = new();
     private readonly Mock<IMoveLearnPrevWordCmdHandler> _previousWordCmdHandler = new();
@@ -22,6 +23,7 @@ public class LearnTests : BunitContext
     {
         Services.AddSingleton(_localizer.Object);
         Services.AddSingleton(_lastWordQueryHandler.Object);
+        Services.AddSingleton(_progressQueryHandler.Object);
         Services.AddSingleton(_sortTypeQueryHandler.Object);
         Services.AddSingleton(_nextWordCmdHandler.Object);
         Services.AddSingleton(_previousWordCmdHandler.Object);
