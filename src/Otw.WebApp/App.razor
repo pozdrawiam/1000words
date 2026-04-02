@@ -1,14 +1,17 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resources.App> Loc
+
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
         <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
     </Found>
     <NotFound>
-        <PageTitle>Not found</PageTitle>
+        <PageTitle>@Loc["NotFoundTitle"]</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
-            <h2>404 Not found</h2>
-            <p role="alert">Sorry, there's nothing at this address.</p>
-            <p role="alert">Strona o podanym adresie nie istnieje.</p>
+            <h2>@Loc["NotFoundTitle"]</h2>
+            <p role="alert">@Loc["NotFoundMessageEn"]</p>
+            <p role="alert">@Loc["NotFoundMessagePl"]</p>
         </LayoutView>
     </NotFound>
 </Router>
