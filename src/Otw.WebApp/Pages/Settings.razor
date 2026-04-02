@@ -22,28 +22,28 @@
 
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
-                    <h5 class="card-title mb-4">Sortowanie słów</h5>
+                    <h5 class="card-title mb-4">@Loc["SortingTitle"]</h5>
                     
-                    <p class="text-muted mb-4">Wybierz sposób sortowania słów dla każdego z trybów.</p>
+                    <p class="text-muted mb-4">@Loc["SortingDescription"]</p>
 
                     <div class="d-grid gap-3">
                         <div class="p-3 border rounded">
                             <h6 class="mb-3">@Loc["LearnMode"]</h6>
                             <select class="form-select" value="@_learnSortType" @onchange="OnLearnSortTypeChanged">
-                                <option value="@WordSortType.Default">Domyślnie</option>
-                                <option value="@WordSortType.AlphabeticalAsc">Alfabetycznie (A-Z)</option>
-                                <option value="@WordSortType.AlphabeticalDesc">Alfabetycznie (Z-A)</option>
-                                <option value="@WordSortType.Random">Losowo</option>
+                                <option value="@WordSortType.Default">@Loc["SortingDefault"]</option>
+                                <option value="@WordSortType.AlphabeticalAsc">@Loc["SortingAscending"]</option>
+                                <option value="@WordSortType.AlphabeticalDesc">@Loc["SortingDescending"]</option>
+                                <option value="@WordSortType.Random">@Loc["SortingRandom"]</option>
                             </select>
                         </div>
 
                         <div class="p-3 border rounded">
                             <h6 class="mb-3">@Loc["ReviewMode"]</h6>
                             <select class="form-select" value="@_reviewSortType" @onchange="OnReviewSortTypeChanged">
-                                <option value="@WordSortType.Default">Domyślnie</option>
-                                <option value="@WordSortType.AlphabeticalAsc">Alfabetycznie (A-Z)</option>
-                                <option value="@WordSortType.AlphabeticalDesc">Alfabetycznie (Z-A)</option>
-                                <option value="@WordSortType.Random">Losowo</option>
+                                <option value="@WordSortType.Default">@Loc["SortingDefault"]</option>
+                                <option value="@WordSortType.AlphabeticalAsc">@Loc["SortingAscending"]</option>
+                                <option value="@WordSortType.AlphabeticalDesc">@Loc["SortingDescending"]</option>
+                                <option value="@WordSortType.Random">@Loc["SortingRandom"]</option>
                             </select>
                         </div>
                     </div>
