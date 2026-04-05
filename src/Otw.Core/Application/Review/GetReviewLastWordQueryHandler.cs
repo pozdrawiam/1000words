@@ -20,18 +20,21 @@ public class GetReviewLastWordQueryHandler : IGetReviewLastWordQueryHandler
     
     public async Task<WordEntity> ExecuteAsync()
     {
-        int lastWordId = 1;
-        var storedId = await _parameters.GetReviewLastWordIdAsync();
-        
-        if (storedId.HasValue)
-            lastWordId = storedId.Value;
-
+        var lastWordId = await ResolveLastWordIdAsync();
         var lastWord = await _repo.GetByIdAsync(lastWordId);
 
-        if (lastWord is not null)
-            return lastWord;
-        
-        var firstWord = (await _repo.GetAllAsync()).First();
-        return firstWord;
+        return lastWord ?? (await _repo.GetAllAsync()).First();
+    }
+
+    private async Task<int> ResolveLastWordIdAsync()
+    {
+        var storedId = await _parameters.GetReviewLastWordIdAsync();
+        if (storedId.HasValue)
+            return storedId.Value;
+
+        var sortType = await _parameters.GetReviewSortTypeAsync();
+        var words = await WordsHelper.GetWordsSortedAsync(_repo, sortType);
+
+        return words.First().Id;
     }
 }

@@ -26,6 +26,9 @@ public class GetReviewLastWordQueryHandlerTests
             Translation = "Test1Translation"
         };
         
+        _repoMock.Setup(r => r.GetAllAsync())
+            .ReturnsAsync([ expectedWord ]);
+        
         _repoMock.Setup(r => r.GetByIdAsync(1))
             .ReturnsAsync(expectedWord);
 
@@ -33,8 +36,7 @@ public class GetReviewLastWordQueryHandlerTests
         var result = await _sut.ExecuteAsync();
         
         Assert.Equal(expectedWord, result);
-        _repoMock.Verify(r => r.GetByIdAsync(1), Times.Once);
-        _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
+        _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
     }
 
     [Fact]
@@ -56,8 +58,7 @@ public class GetReviewLastWordQueryHandlerTests
         var result = await _sut.ExecuteAsync();
         
         Assert.Equal(words.First(), result);
-        _repoMock.Verify(r => r.GetByIdAsync(1), Times.Once);
-        _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
+        _repoMock.Verify(r => r.GetAllAsync());
     }
     
     [Fact]
@@ -101,6 +102,9 @@ public class GetReviewLastWordQueryHandlerTests
 
         _repoMock.Setup(r => r.GetByIdAsync(1))
             .ReturnsAsync(expectedWord);
+        
+        _repoMock.Setup(r => r.GetAllAsync())
+            .ReturnsAsync([ expectedWord ]);
 
         // Act
         var result = await _sut.ExecuteAsync();
