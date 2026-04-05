@@ -20,19 +20,24 @@ public class MoveReviewNextWordCmdHandler : IMoveReviewNextWordCmdHandler
 
     public async Task<WordEntity> ExecuteAsync(int currentWordId)
     {
-        var nextWordId = currentWordId + 1;
-        var nextWord = await _repo.GetByIdAsync(nextWordId);
-
-        if (nextWord is not null)
-        {
-            await _parameters.SetReviewLastWordIdAsync(nextWord.Id);
+        var sortType = await _parameters.GetReviewSortTypeAsync();
+        var nextWord = await GetNextWordAsync(currentWordId, sortType);
+        
+        await _parameters.SetReviewLastWordIdAsync(nextWord.Id);
             
-            return nextWord;
-        }
+        return nextWord;
+    }
+    
+    private async Task<WordEntity> GetNextWordAsync(int currentWordId, WordSortType sortType)
+    {
+        var words = (await WordsHelper.GetWordsSortedAsync(_repo, sortType)).ToList();
+        var currentWordIndex = words.FindIndex(w => w.Id == currentWordId);
+
+        if (currentWordIndex == -1)
+            return words.First();
         
-        var firstWord = (await _repo.GetAllAsync()).First();
-        await _parameters.SetReviewLastWordIdAsync(firstWord.Id);
+        var nextWordIndex = (currentWordIndex + 1) % words.Count;
         
-        return firstWord;
+        return nextWordIndex >= words.Count ? words.First() : words[nextWordIndex];
     }
 }
