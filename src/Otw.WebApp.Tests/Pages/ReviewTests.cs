@@ -14,6 +14,7 @@ public class ReviewTests : BunitContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.Review>> _localizer = new();
     private readonly Mock<IGetReviewLastWordQueryHandler> _lastWordHandler = new();
+    private readonly Mock<IGetReviewProgressQueryHandler> _progressQueryHandler = new();
     private readonly Mock<IGetReviewSortTypeQueryHandler> _sortTypeQueryHandler = new();
     private readonly Mock<IMoveReviewNextWordCmdHandler> _nextWordHandler = new();
     private readonly Mock<IMoveReviewPrevWordCmdHandler> _prevWordHandler = new();
@@ -22,6 +23,7 @@ public class ReviewTests : BunitContext
     {
         Services.AddSingleton(_localizer.Object);
         Services.AddSingleton(_lastWordHandler.Object);
+        Services.AddSingleton(_progressQueryHandler.Object);
         Services.AddSingleton(_sortTypeQueryHandler.Object);
         Services.AddSingleton(_nextWordHandler.Object);
         Services.AddSingleton(_prevWordHandler.Object);

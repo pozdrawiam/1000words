@@ -8,6 +8,7 @@
 
 @inject IGetReviewLastWordQueryHandler LastWordHandler
 @inject IGetReviewSortTypeQueryHandler SortTypeHandler
+@inject IGetReviewProgressQueryHandler ProgressHandler
 @inject IMoveReviewNextWordCmdHandler NextWordHandler
 @inject IMoveReviewPrevWordCmdHandler PreviousWordHandler
 
@@ -21,8 +22,8 @@
                 if (_sortType != WordSortType.Random)
                 {
                     <div class="progress mb-4" role="progressbar" aria-label="@Loc["Progress"]"
-                         aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar" style="width: @ProgressPercent%">@ProgressPercent%</div>
+                         aria-valuenow="@_progressPercent.Item2" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: @_progressPercent.Item2%">@_progressPercent.Item2%</div>
                     </div>
                 }
 
@@ -46,7 +47,7 @@
                                 {
                                     <button class="btn btn-secondary flex-grow-1"
                                             @onclick="LoadPreviousWord"
-                                            disabled="@(_currentWord.Id <= 1)">
+                                            disabled="@((decimal)_progressPercent.Item1 == 0.001m)">
                                         <i class="bi bi-arrow-left"></i> @Loc["PreviousWord"]
                                     </button>
                                 }
@@ -73,14 +74,14 @@
 
 @code {
     private WordEntity? _currentWord;
+    private (double, int) _progressPercent;
     private bool _showTranslation;
     private WordSortType? _sortType;
-    
-    private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / DomainConsts.TotalWords * 100);
     
     protected override async Task OnInitializedAsync()
     {
         _currentWord = await LastWordHandler.ExecuteAsync();
+        _progressPercent = await ProgressHandler.ExecuteAsync(_currentWord.Id);
         _sortType = await SortTypeHandler.ExecuteAsync();
     }
 
@@ -89,15 +90,17 @@
         if (_currentWord is not null)
         {
             _currentWord = await NextWordHandler.ExecuteAsync(_currentWord.Id);
+            _progressPercent = await ProgressHandler.ExecuteAsync(_currentWord.Id);
             _showTranslation = false;
         }
     }
     
     private async Task LoadPreviousWord()
     {
-        if (_currentWord is not null && _currentWord.Id > 1)
+        if (_currentWord is not null)
         {
             _currentWord = await PreviousWordHandler.ExecuteAsync(_currentWord.Id);
+            _progressPercent = await ProgressHandler.ExecuteAsync(_currentWord.Id);
             _showTranslation = false;
         }
     }
