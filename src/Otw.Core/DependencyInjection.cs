@@ -17,6 +17,7 @@ public static class DependencyInjection
         services.AddScoped<IMoveLearnPrevWordCmdHandler, MoveLearnPrevWordCmdHandler>();
         
         services.AddScoped<IGetReviewLastWordQueryHandler, GetReviewLastWordQueryHandler>();
+        services.AddScoped<IGetReviewProgressQueryHandler, GetReviewProgressQueryHandler>();
         services.AddScoped<IMoveReviewNextWordCmdHandler, MoveReviewNextWordCmdHandler>();
         services.AddScoped<IMoveReviewPrevWordCmdHandler, MoveReviewPrevWordCmdHandler>();
         
