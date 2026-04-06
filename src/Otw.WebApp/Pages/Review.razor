@@ -1,13 +1,16 @@
 ﻿@page "/review"
 @using Microsoft.Extensions.Localization
 @using Otw.Core.Application.Review
+@using Otw.Core.Application.Settings
 @using Otw.Core.Domain
 
 @inject IStringLocalizer<Resources.Pages.Review> Loc
 
-@inject ILastWordQueryHandler LastWordHandler
-@inject INextWordCmdHandler NextWordHandler
-@inject IPreviousWordCmdHandler PreviousWordHandler
+@inject IGetReviewLastWordQueryHandler LastWordHandler
+@inject IGetReviewSortTypeQueryHandler SortTypeHandler
+@inject IGetReviewProgressQueryHandler ProgressHandler
+@inject IMoveReviewNextWordCmdHandler NextWordHandler
+@inject IMoveReviewPrevWordCmdHandler PreviousWordHandler
 
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -16,11 +19,14 @@
 
             @if (_currentWord is not null)
             {
-                <div class="progress mb-4" role="progressbar" aria-label="@Loc["Progress"]" 
-                     aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar" style="width: @ProgressPercent%">@ProgressPercent%</div>
-                </div>
-                
+                if (_sortType != WordSortType.Random)
+                {
+                    <div class="progress mb-4" role="progressbar" aria-label="@Loc["Progress"]"
+                         aria-valuenow="@_progressPercent.Item2" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: @_progressPercent.Item2%">@_progressPercent.Item2%</div>
+                    </div>
+                }
+
                 <div class="card shadow-sm text-center">
                     <div class="card-body">
                         <h5 class="card-title display-2 text-primary">@_currentWord.Value</h5>
@@ -37,11 +43,14 @@
                                 </button>
                             }
                             <div class="d-flex justify-content-between gap-2">
-                                <button class="btn btn-secondary flex-grow-1" 
-                                        @onclick="LoadPreviousWord"
-                                        disabled="@(_currentWord.Id <= 1)">
-                                    <i class="bi bi-arrow-left"></i> @Loc["PreviousWord"]
-                                </button>
+                                @if (_sortType != WordSortType.Random)
+                                {
+                                    <button class="btn btn-secondary flex-grow-1"
+                                            @onclick="LoadPreviousWord"
+                                            disabled="@((decimal)_progressPercent.Item1 == 0.001m)">
+                                        <i class="bi bi-arrow-left"></i> @Loc["PreviousWord"]
+                                    </button>
+                                }
                                 <button class="btn btn-primary flex-grow-1" @onclick="LoadNextWord">
                                     @Loc["NextWord"] <i class="bi bi-arrow-right"></i>
                                 </button>
@@ -65,27 +74,33 @@
 
 @code {
     private WordEntity? _currentWord;
+    private (double, int) _progressPercent;
     private bool _showTranslation;
+    private WordSortType? _sortType;
     
-    private int ProgressPercent => (int)((double)(_currentWord?.Id ?? 0) / DomainConsts.TotalWords * 100);
-    
-    protected override async Task OnInitializedAsync() => 
+    protected override async Task OnInitializedAsync()
+    {
         _currentWord = await LastWordHandler.ExecuteAsync();
+        _progressPercent = await ProgressHandler.ExecuteAsync(_currentWord.Id);
+        _sortType = await SortTypeHandler.ExecuteAsync();
+    }
 
     private async Task LoadNextWord()
     {
         if (_currentWord is not null)
         {
             _currentWord = await NextWordHandler.ExecuteAsync(_currentWord.Id);
+            _progressPercent = await ProgressHandler.ExecuteAsync(_currentWord.Id);
             _showTranslation = false;
         }
     }
     
     private async Task LoadPreviousWord()
     {
-        if (_currentWord is not null && _currentWord.Id > 1)
+        if (_currentWord is not null)
         {
             _currentWord = await PreviousWordHandler.ExecuteAsync(_currentWord.Id);
+            _progressPercent = await ProgressHandler.ExecuteAsync(_currentWord.Id);
             _showTranslation = false;
         }
     }

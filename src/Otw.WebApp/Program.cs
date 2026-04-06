@@ -11,7 +11,7 @@ builder.Services.AddLocalization();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-builder.Services.AddDomain();
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
 await builder.Build().RunAsync();

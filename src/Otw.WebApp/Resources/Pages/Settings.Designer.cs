@@ -18,44 +18,64 @@ namespace Otw.WebApp.Resources.Pages {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Settings {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        private static System.Resources.ResourceManager resourceMan;
         
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private static System.Globalization.CultureInfo resourceCulture;
         
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Settings() {
         }
         
-        /// <summary>
-        ///   Returns the cached ResourceManager instance used by this class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public static System.Resources.ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Otw.WebApp.Resources.Pages.Settings", typeof(Settings).Assembly);
+                if (object.Equals(null, resourceMan)) {
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Otw.WebApp.Resources.Pages.Settings", typeof(Settings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
         
-        /// <summary>
-        ///   Overrides the current thread's CurrentUICulture property for all
-        ///   resource lookups using this strongly typed resource class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ustawienia.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resetuj postęp.
+        /// </summary>
+        public static string ResetProgressTitle {
+            get {
+                return ResourceManager.GetString("ResetProgressTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Możesz zresetować postęp w każdym trybie osobno. Ta operacja jest nieodwracalna..
+        /// </summary>
+        public static string ResetProgressDescription {
+            get {
+                return ResourceManager.GetString("ResetProgressDescription", resourceCulture);
             }
         }
         
@@ -78,51 +98,6 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resetuj.
-        /// </summary>
-        public static string Reset {
-            get {
-                return ResourceManager.GetString("Reset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Czy na pewno chcesz zresetować postęp w trybie nauki? Ta operacja jest nieodwracalna..
-        /// </summary>
-        public static string ResetLearnConfirm {
-            get {
-                return ResourceManager.GetString("ResetLearnConfirm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Możesz zresetować postęp w każdym trybie osobno. Ta operacja jest nieodwracalna..
-        /// </summary>
-        public static string ResetProgressDescription {
-            get {
-                return ResourceManager.GetString("ResetProgressDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Resetuj postęp.
-        /// </summary>
-        public static string ResetProgressTitle {
-            get {
-                return ResourceManager.GetString("ResetProgressTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Czy na pewno chcesz zresetować postęp w trybie powtórek? Ta operacja jest nieodwracalna..
-        /// </summary>
-        public static string ResetReviewConfirm {
-            get {
-                return ResourceManager.GetString("ResetReviewConfirm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Sprawdź się.
         /// </summary>
         public static string ReviewMode {
@@ -141,11 +116,83 @@ namespace Otw.WebApp.Resources.Pages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ustawienia.
+        ///   Looks up a localized string similar to Resetuj.
         /// </summary>
-        public static string Title {
+        public static string Reset {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czy na pewno chcesz zresetować postęp w trybie nauki? Ta operacja jest nieodwracalna..
+        /// </summary>
+        public static string ResetLearnConfirm {
+            get {
+                return ResourceManager.GetString("ResetLearnConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czy na pewno chcesz zresetować postęp w trybie powtórek? Ta operacja jest nieodwracalna..
+        /// </summary>
+        public static string ResetReviewConfirm {
+            get {
+                return ResourceManager.GetString("ResetReviewConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sortowanie słów.
+        /// </summary>
+        public static string SortingTitle {
+            get {
+                return ResourceManager.GetString("SortingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wybierz sposób sortowania słów dla każdego z trybów..
+        /// </summary>
+        public static string SortingDescription {
+            get {
+                return ResourceManager.GetString("SortingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Domyślnie.
+        /// </summary>
+        public static string SortingDefault {
+            get {
+                return ResourceManager.GetString("SortingDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alfabetycznie (A-Z).
+        /// </summary>
+        public static string SortingAscending {
+            get {
+                return ResourceManager.GetString("SortingAscending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alfabetycznie (Z-A).
+        /// </summary>
+        public static string SortingDescending {
+            get {
+                return ResourceManager.GetString("SortingDescending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Losowo.
+        /// </summary>
+        public static string SortingRandom {
+            get {
+                return ResourceManager.GetString("SortingRandom", resourceCulture);
             }
         }
     }

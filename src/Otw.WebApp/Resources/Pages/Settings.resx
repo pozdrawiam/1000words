@@ -48,4 +48,22 @@
     <data name="ResetReviewConfirm" xml:space="preserve">
         <value>Czy na pewno chcesz zresetować postęp w trybie powtórek? Ta operacja jest nieodwracalna.</value>
     </data>
+    <data name="SortingTitle" xml:space="preserve">
+        <value>Sortowanie słów</value>
+    </data>
+    <data name="SortingDescription" xml:space="preserve">
+        <value>Wybierz sposób sortowania słów dla każdego z trybów.</value>
+    </data>
+    <data name="SortingDefault" xml:space="preserve">
+        <value>Domyślnie</value>
+    </data>
+    <data name="SortingAscending" xml:space="preserve">
+        <value>Alfabetycznie (A-Z)</value>
+    </data>
+    <data name="SortingDescending" xml:space="preserve">
+        <value>Alfabetycznie (Z-A)</value>
+    </data>
+    <data name="SortingRandom" xml:space="preserve">
+        <value>Losowo</value>
+    </data>
 </root>

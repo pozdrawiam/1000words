@@ -4,41 +4,44 @@ using Otw.Core.Domain;
 
 namespace Otw.Core.Tests.Application.Learn;
 
-public class NextWordCmdHandlerTests
+public class MoveLearnNextWordCmdHandlerTests
 {
-    private readonly NextWordCmdHandler _sut;
+    private readonly MoveLearnNextWordCmdHandler _sut;
 
-    private readonly Mock<ILocalStorageService> _localStorageMock = new();
+    private readonly Mock<IParametersRepository> _parametersMock = new();
     private readonly Mock<IWordsRepository> _repoMock = new();
     
-    public NextWordCmdHandlerTests()
+    public MoveLearnNextWordCmdHandlerTests()
     {
-        _sut = new(_localStorageMock.Object, _repoMock.Object);
+        _sut = new(_parametersMock.Object, _repoMock.Object);
     }
 
     [Fact]
     public async Task ExecuteAsync_ShouldReturnNextWord_WhenItExists()
     {
-        const int currentWordId = 5;
-        var expectedNextWord = new WordEntity
+        var words = new WordEntity[]
         {
-            Id = currentWordId + 1,
-            Value = "NextWord",
-            Translation = ""
+            new() { Id = 1, Value = "FirstWord", Translation = "" },
+            new() { Id = 2, Value = "NextWord", Translation = "" }
         };
 
-        _repoMock.Setup(r => r.GetByIdAsync(currentWordId + 1))
-            .ReturnsAsync(expectedNextWord);
+        _repoMock.Setup(r => r.GetAllAsync())
+            .ReturnsAsync(words);
 
-        // Act
-        var result = await _sut.ExecuteAsync(currentWordId);
+        _parametersMock.Setup(p => p.GetLearnLastWordIdAsync())
+            .ReturnsAsync(1);
         
-        Assert.Equal(expectedNextWord, result);
-        _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
-        _repoMock.Verify(r => r.GetAllAsync(), Times.Never);
+        _parametersMock.Setup(p => p.GetLearnSortTypeAsync())
+            .ReturnsAsync(WordSortType.Default);
+        
+        // Act
+        var result = await _sut.ExecuteAsync(1);
+        
+        Assert.Equal(words.Skip(1).First(), result);
+        _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
 
-        _localStorageMock.Verify(ls => 
-            ls.SetItemAsync("Learn_lastWordId", expectedNextWord.Id.ToString()), 
+        _parametersMock.Verify(p => 
+            p.SetLearnLastWordIdAsync(2), 
             Times.Once);
     }
 
@@ -63,11 +66,10 @@ public class NextWordCmdHandlerTests
         var result = await _sut.ExecuteAsync(currentWordId);
         
         Assert.Equal(words.First(), result);
-        _repoMock.Verify(r => r.GetByIdAsync(currentWordId + 1), Times.Once);
         _repoMock.Verify(r => r.GetAllAsync(), Times.Once);
 
-        _localStorageMock.Verify(ls => 
-            ls.SetItemAsync("Learn_lastWordId", words.First().Id.ToString()), 
+        _parametersMock.Verify(p => 
+            p.SetLearnLastWordIdAsync(words.First().Id), 
             Times.Once);
     }
 
@@ -87,8 +89,8 @@ public class NextWordCmdHandlerTests
             _sut.ExecuteAsync(currentWordId)
         );
         
-        _localStorageMock.Verify(ls => 
-            ls.SetItemAsync(It.IsAny<string>(), It.IsAny<string>()), 
+        _parametersMock.Verify(p => 
+            p.SetLearnLastWordIdAsync(It.IsAny<int>()), 
             Times.Never);
     }
 }

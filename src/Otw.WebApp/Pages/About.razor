@@ -1,12 +1,11 @@
 ﻿@page "/about"
 @using Microsoft.Extensions.Localization
-@using Otw.Core.Application
 @using Otw.Core.Domain
 
 @inject IStringLocalizer<Resources.Pages.About> Loc
 
 @inject NavigationManager Navigation
-@inject ILocalStorageService Storage
+@inject IParametersRepository Parameters
 
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -56,7 +55,7 @@
 @code {
     private async Task StartLearning()
     {
-        await Storage.SetItemAsync(ApplicationConsts.LearnStartedKey, ApplicationConsts.LearnStartedValue);
+        await Parameters.SetLearnStartedAsync();
         
         Navigation.NavigateTo("/learn");
     }

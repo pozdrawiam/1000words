@@ -1,4 +1,4 @@
-﻿namespace Otw.Core.Domain;
+﻿namespace Otw.Core.Infrastructure;
 
 public interface ILocalStorageService
 {

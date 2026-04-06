@@ -1,9 +1,17 @@
 @page "/settings"
 @using Microsoft.Extensions.Localization
+@using Otw.Core.Application.Settings
+@using Otw.Core.Domain
 
 @inject IStringLocalizer<Resources.Pages.Settings> Loc
-@inject Otw.Core.Application.Learn.IResetProgressCmdHandler LearnResetHandler
-@inject Otw.Core.Application.Review.IResetProgressCmdHandler ReviewResetHandler
+
+@inject IResetLearnProgressCmdHandler LearnResetHandler
+@inject IResetReviewProgressCmdHandler ReviewResetReviewHandler
+@inject IGetLearnSortTypeQueryHandler LearnSortHandler
+@inject ISetLearSortTypeCmdHandler SetLearSortTypeCmdHandler
+@inject IGetReviewSortTypeQueryHandler ReviewSortHandler
+@inject ISetReviewSortTypeCmdHandler SetReviewSortTypeCmdHandler
+
 @inject NavigationManager Navigation
 @inject IJSRuntime JsRuntime
 
@@ -12,7 +20,37 @@
         <div class="col-md-6">
             <h3 class="text-center mb-4">@Loc["Title"]</h3>
 
-            <div class="card shadow-sm">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">@Loc["SortingTitle"]</h5>
+                    
+                    <p class="text-muted mb-4">@Loc["SortingDescription"]</p>
+
+                    <div class="d-grid gap-3">
+                        <div class="p-3 border rounded">
+                            <h6 class="mb-3">@Loc["LearnMode"]</h6>
+                            <select class="form-select" value="@_learnSortType" @onchange="OnLearnSortTypeChanged">
+                                <option value="@WordSortType.Default">@Loc["SortingDefault"]</option>
+                                <option value="@WordSortType.AlphabeticalAsc">@Loc["SortingAscending"]</option>
+                                <option value="@WordSortType.AlphabeticalDesc">@Loc["SortingDescending"]</option>
+                                <option value="@WordSortType.Random">@Loc["SortingRandom"]</option>
+                            </select>
+                        </div>
+
+                        <div class="p-3 border rounded">
+                            <h6 class="mb-3">@Loc["ReviewMode"]</h6>
+                            <select class="form-select" value="@_reviewSortType" @onchange="OnReviewSortTypeChanged">
+                                <option value="@WordSortType.Default">@Loc["SortingDefault"]</option>
+                                <option value="@WordSortType.AlphabeticalAsc">@Loc["SortingAscending"]</option>
+                                <option value="@WordSortType.AlphabeticalDesc">@Loc["SortingDescending"]</option>
+                                <option value="@WordSortType.Random">@Loc["SortingRandom"]</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     <h5 class="card-title mb-4">@Loc["ResetProgressTitle"]</h5>
                     
@@ -48,6 +86,33 @@
 </div>
 
 @code {
+    private WordSortType _learnSortType;
+    private WordSortType _reviewSortType;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _learnSortType = await LearnSortHandler.ExecuteAsync();
+        _reviewSortType = await ReviewSortHandler.ExecuteAsync();
+    }
+
+    private async Task OnLearnSortTypeChanged(ChangeEventArgs e)
+    {
+        if (Enum.TryParse<WordSortType>(e.Value?.ToString(), out var result))
+        {
+            _learnSortType = result;
+            await SetLearSortTypeCmdHandler.ExecuteAsync(result);
+        }
+    }
+
+    private async Task OnReviewSortTypeChanged(ChangeEventArgs e)
+    {
+        if (Enum.TryParse<WordSortType>(e.Value?.ToString(), out var result))
+        {
+            _reviewSortType = result;
+            await SetReviewSortTypeCmdHandler.ExecuteAsync(result);
+        }
+    }
+
     private async Task ResetLearnProgress()
     {
         var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", Loc["ResetLearnConfirm"].Value);
@@ -63,7 +128,7 @@
         var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", Loc["ResetReviewConfirm"].Value);
         if (confirmed)
         {
-            await ReviewResetHandler.ExecuteAsync();
+            await ReviewResetReviewHandler.ExecuteAsync();
             Navigation.NavigateTo("/review", forceLoad: true);
         }
     }

@@ -2,11 +2,11 @@
 
 namespace Otw.Core.Infrastructure;
 
-public class WordsRepository : IWordsRepository
+public sealed class WordsRepository : IWordsRepository
 {
     private readonly HttpClient _httpClient;
     
-    private static WordEntity[]? _cache;
+    private Dictionary<int, WordEntity>? _cache;
 
     public WordsRepository(HttpClient httpClient)
     {
@@ -16,41 +16,57 @@ public class WordsRepository : IWordsRepository
     public async Task<WordEntity[]> GetAllAsync()
     {
         if (_cache is not null)
-            return _cache;
+            return _cache.Values.ToArray();
 
-        _cache = await GetFromUrl();
+        await EnsureCacheLoadedAsync();
         
-        return _cache;
+        return _cache!.Values.ToArray();
     }
 
     public async Task<WordEntity?> GetByIdAsync(int id)
     {
-        var result = (await GetAllAsync()).FirstOrDefault(x => x.Id == id);
-        return result;
+        if (_cache is null)
+            await EnsureCacheLoadedAsync();
+
+        return _cache!.GetValueOrDefault(id);
     }
     
-    private async Task<WordEntity[]> GetFromUrl()
+    private async Task EnsureCacheLoadedAsync()
     {
-        var csvContent = await _httpClient.GetStringAsync("data/data-v1.csv");
-        var words = new List<WordEntity>();
-
-        // ReSharper disable once UseCollectionExpression
-        var lines = csvContent.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        if (_cache is not null) 
+            return;
         
-        for (int i = 0; i < lines.Length; i++)
+        await using var stream = await _httpClient.GetStreamAsync("data/data-v1.csv");
+        using var reader = new StreamReader(stream);
+
+        var words = new Dictionary<int, WordEntity>(DomainConsts.TotalWords);
+        var currentIndex = 0;
+
+        while (await reader.ReadLineAsync() is { } line)
         {
-            var parts = lines[i].Split(';');
-            if (parts.Length >= 2)
+            if (string.IsNullOrWhiteSpace(line)) 
+                continue;
+            
+            var separatorIndex = line.IndexOf(';');
+            if (separatorIndex == -1) 
+                continue;
+            
+            var value = line[..separatorIndex].Trim();
+            if (separatorIndex + 1 >= line.Length) 
+                continue;
+
+            var translation = line[(separatorIndex + 1)..].Trim();
+            
+            currentIndex++;
+            
+            words[currentIndex] = new WordEntity
             {
-                words.Add(new()
-                {
-                    Id = i + 1,
-                    Value = parts[0].Trim(),
-                    Translation = parts[1].Trim()
-                });
-            }
+                Id = currentIndex,
+                Value = value,
+                Translation = translation
+            };
         }
         
-        return words.ToArray();
+        _cache = words;
     }
 }

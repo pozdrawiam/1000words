@@ -4,21 +4,27 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Moq;
 using Otw.Core.Application.Learn;
+using Otw.Core.Application.Settings;
 using Otw.Core.Domain;
+using Otw.WebApp.Pages;
 
 namespace Otw.WebApp.Tests.Pages;
 
-public class LearnTests : TestContext
+public class LearnTests : BunitContext
 {
     private readonly Mock<IStringLocalizer<Resources.Pages.Learn>> _localizer = new();
-    private readonly Mock<ILastWordQueryHandler> _lastWordQueryHandler = new();
-    private readonly Mock<INextWordCmdHandler> _nextWordCmdHandler = new();
-    private readonly Mock<IPreviousWordCmdHandler> _previousWordCmdHandler = new();
+    private readonly Mock<IGetLearnLastWordQueryHandler> _lastWordQueryHandler = new();
+    private readonly Mock<IGetLearnProgressQueryHandler> _progressQueryHandler = new();
+    private readonly Mock<IGetLearnSortTypeQueryHandler> _sortTypeQueryHandler = new();
+    private readonly Mock<IMoveLearnNextWordCmdHandler> _nextWordCmdHandler = new();
+    private readonly Mock<IMoveLearnPrevWordCmdHandler> _previousWordCmdHandler = new();
     
     public LearnTests()
     {
         Services.AddSingleton(_localizer.Object);
         Services.AddSingleton(_lastWordQueryHandler.Object);
+        Services.AddSingleton(_progressQueryHandler.Object);
+        Services.AddSingleton(_sortTypeQueryHandler.Object);
         Services.AddSingleton(_nextWordCmdHandler.Object);
         Services.AddSingleton(_previousWordCmdHandler.Object);
     }
@@ -42,7 +48,7 @@ public class LearnTests : TestContext
             });
 
         // Act
-        var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Learn>();
         
         Assert.Contains("Test loading message", cut.Markup);
     }
@@ -59,7 +65,7 @@ public class LearnTests : TestContext
             });
         
         // Act
-        var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Learn>();
         
         Assert.Contains("Test1", cut.Markup);
         Assert.Contains("Test1Translation", cut.Markup);
@@ -89,7 +95,7 @@ public class LearnTests : TestContext
             .Setup(x => x.ExecuteAsync(firstWord.Id))
             .ReturnsAsync(nextWord);
 
-        var cut = RenderComponent<Otw.WebApp.Pages.Learn>();
+        var cut = Render<Learn>();
         var button = cut.Find("button.btn-primary");
         
         // Act

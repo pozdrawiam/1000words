@@ -21,7 +21,7 @@ namespace Otw.WebApp.Resources.Pages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class About {
+    public class About {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -35,7 +35,7 @@ namespace Otw.WebApp.Resources.Pages {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Otw.WebApp.Resources.Pages.About", typeof(About).Assembly);
@@ -50,7 +50,7 @@ namespace Otw.WebApp.Resources.Pages {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -62,7 +62,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to 1000 najpopularniejszych słówek angielskich.
         /// </summary>
-        internal static string DescriptionHighlight {
+        public static string DescriptionHighlight {
             get {
                 return ResourceManager.GetString("DescriptionHighlight", resourceCulture);
             }
@@ -71,7 +71,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Aplikacja do nauki.
         /// </summary>
-        internal static string DescriptionPart1 {
+        public static string DescriptionPart1 {
             get {
                 return ResourceManager.GetString("DescriptionPart1", resourceCulture);
             }
@@ -80,7 +80,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Stworzona z myślą o osobach, które chcą w prosty i skuteczny sposób poszerzyć swoje słownictwo i utrwalić podstawowe wyrażenia w języku angielskim..
         /// </summary>
-        internal static string DescriptionPart2 {
+        public static string DescriptionPart2 {
             get {
                 return ResourceManager.GetString("DescriptionPart2", resourceCulture);
             }
@@ -89,7 +89,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to tryb nauki.
         /// </summary>
-        internal static string Feature1 {
+        public static string Feature1 {
             get {
                 return ResourceManager.GetString("Feature1", resourceCulture);
             }
@@ -98,7 +98,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to tryb sprawdzania.
         /// </summary>
-        internal static string Feature2 {
+        public static string Feature2 {
             get {
                 return ResourceManager.GetString("Feature2", resourceCulture);
             }
@@ -107,7 +107,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to zapamiętywanie postępu w pamięci przeglądarki.
         /// </summary>
-        internal static string Feature3 {
+        public static string Feature3 {
             get {
                 return ResourceManager.GetString("Feature3", resourceCulture);
             }
@@ -116,7 +116,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to responsywny interfejs – działa zarówno na komputerze, jak i telefonie.
         /// </summary>
-        internal static string Feature4 {
+        public static string Feature4 {
             get {
                 return ResourceManager.GetString("Feature4", resourceCulture);
             }
@@ -125,7 +125,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to automatyczny wygląd ciemny/jasny.
         /// </summary>
-        internal static string Feature5 {
+        public static string Feature5 {
             get {
                 return ResourceManager.GetString("Feature5", resourceCulture);
             }
@@ -134,7 +134,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Funkcje.
         /// </summary>
-        internal static string FeaturesTitle {
+        public static string FeaturesTitle {
             get {
                 return ResourceManager.GetString("FeaturesTitle", resourceCulture);
             }
@@ -143,7 +143,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Kod projektu na GitHub.
         /// </summary>
-        internal static string GitHubLink {
+        public static string GitHubLink {
             get {
                 return ResourceManager.GetString("GitHubLink", resourceCulture);
             }
@@ -152,7 +152,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Zacznij naukę słówek.
         /// </summary>
-        internal static string StartLearningBtn {
+        public static string StartLearningBtn {
             get {
                 return ResourceManager.GetString("StartLearningBtn", resourceCulture);
             }
@@ -161,7 +161,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Znajdź i opanuj podręcznik, aby poznać podstawy - może być PDF z internetu..
         /// </summary>
-        internal static string Step1 {
+        public static string Step1 {
             get {
                 return ResourceManager.GetString("Step1", resourceCulture);
             }
@@ -170,7 +170,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Poznaj 1000 najpopularniejszych słów, aby rozumieć codzienne rozmowy..
         /// </summary>
-        internal static string Step2 {
+        public static string Step2 {
             get {
                 return ResourceManager.GetString("Step2", resourceCulture);
             }
@@ -179,7 +179,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Osłuchaj się - oglądaj filmy o interesujących Cię tematach z napisami po angielsku..
         /// </summary>
-        internal static string Step3 {
+        public static string Step3 {
             get {
                 return ResourceManager.GetString("Step3", resourceCulture);
             }
@@ -188,7 +188,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Zacznij mówić - powtarzaj zdania z filmów na głos..
         /// </summary>
-        internal static string Step4 {
+        public static string Step4 {
             get {
                 return ResourceManager.GetString("Step4", resourceCulture);
             }
@@ -197,7 +197,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to Nauka angielskiego jest prosta.
         /// </summary>
-        internal static string StepsTitle {
+        public static string StepsTitle {
             get {
                 return ResourceManager.GetString("StepsTitle", resourceCulture);
             }
@@ -206,7 +206,7 @@ namespace Otw.WebApp.Resources.Pages {
         /// <summary>
         ///   Looks up a localized string similar to O aplikacji.
         /// </summary>
-        internal static string Title {
+        public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
